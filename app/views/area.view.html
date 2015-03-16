@@ -1,5 +1,19 @@
 <ul class="nav navbar-nav">
-  <li ng-repeat="area in areaCtrl.areas" ng-class="{active: areaCtrl.$stateParams.areaid === area.Id}">
-    <a ui-sref="group({areaid: area.Id})">{{area.Title}}</a>
+  <li ng-repeat="area in areaCtrl.areas">
+
+    <!-- Split button -->
+    <div class="btn-group roffset">
+      <button ng-class="{'btn-primary': areaCtrl.$stateParams.areaid === area.Id}"
+        ui-sref="group({areaid: area.Id})" type="button" class="btn btn-default navbar-btn">{{area.Title}}</button>
+      <button ng-class="{'btn-primary': areaCtrl.$stateParams.areaid === area.Id}"
+        type="button" class="btn btn-default dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Edit</a></li>
+        <li><a href="#">Remove</a></li>
+      </ul>
+    </div>
   </li>
 </ul>

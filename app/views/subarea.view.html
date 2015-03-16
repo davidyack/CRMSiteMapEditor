@@ -1,8 +1,19 @@
 <div class="col-lg-3 voffset">
-  <button ng-repeat="subarea in subAreaCtrl.subareas"
-      class="btn btn-default btn-sm subarea btn-block">
-      {{subarea.Title}}
-  </button>
+
+  <!-- Split button -->
+  <div class="btn-group voffset roffset" ng-repeat="subarea in subAreaCtrl.subareas">
+    <button
+      type="button" class="btn btn-default">{{subarea.Title}}</button>
+    <button
+      type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Edit</a></li>
+      <li><a href="#">Remove</a></li>
+    </ul>
+  </div>
 </div>
 
 
