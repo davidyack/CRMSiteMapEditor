@@ -1,0 +1,5 @@
+<ul class="nav navbar-nav">
+  <li ng-repeat="area in areaCtrl.areas" ng-class="{active: areaCtrl.$stateParams.areaid === area.Id}">
+    <a ui-sref="group({areaid: area.Id})">{{area.Title}}</a>
+  </li>
+</ul>

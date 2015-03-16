@@ -1,0 +1,14 @@
+<div class="panel panel-default groups">
+  <div class="col-lg-12 voffset">
+  <button ng-repeat="group in groupCtrl.groups"
+      ui-sref="group.subarea({areaid: groupCtrl.$stateParams.areaid, groupid: group.Id})"
+      ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
+      class="btn roffset">
+      {{group.Title}}
+  </button>
+  </div>
+  <div ui-view='subarea'></div>
+</div>
+
+
+
