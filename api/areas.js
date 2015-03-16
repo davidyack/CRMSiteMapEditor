@@ -17,7 +17,6 @@ app.get('/api/areas', function(req, res) {
 });
 
 app.post('/api/areas', function(req, res) {
-    console.log(req.body);
     res.json(req.body);
 });
 
