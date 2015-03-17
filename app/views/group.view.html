@@ -4,7 +4,7 @@
     <!-- Split button -->
     <div class="btn-group roffset" ng-repeat="group in groupCtrl.groups">
       <button ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
-        ui-sref="group.subarea({areaid: groupCtrl.$stateParams.areaid, groupid: group.Id})" type="button" class="btn">{{group.Title}}</button>
+        ui-sref="area.group.subarea({areaid: groupCtrl.$stateParams.areaid, groupid: group.Id})" type="button" class="btn">{{group.Title}}</button>
       <button ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
         type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
         <span class="caret"></span>

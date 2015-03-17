@@ -9,6 +9,16 @@
 
 
 angular.module('navEditorApp')
+  .config(function($stateProvider) {
+    $stateProvider.state('area', {
+      views: {
+        'areas': {
+          template: '<div areas><div>',
+        }
+      },
+      url: '^/'
+    });
+  })
   .directive('areas', function () {
     return {
       scope: {},

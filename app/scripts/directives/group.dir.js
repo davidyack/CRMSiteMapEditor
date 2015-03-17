@@ -8,7 +8,7 @@
  */
 angular.module('navEditorApp')
   .config(function($stateProvider) {
-    $stateProvider.state('group', {
+    $stateProvider.state('area.group', {
       views: {
         'groups': {
           template: '<div group><div>',

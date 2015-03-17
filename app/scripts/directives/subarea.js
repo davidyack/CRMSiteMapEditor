@@ -8,7 +8,7 @@
  */
 angular.module('navEditorApp')
   .config(function($stateProvider) {
-    $stateProvider.state('group.subarea', {
+    $stateProvider.state('area.group.subarea', {
       views: {
         'subarea': {
           template: '<div subarea><div>',
