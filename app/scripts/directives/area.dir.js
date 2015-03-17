@@ -16,7 +16,7 @@ angular.module('navEditorApp')
           template: '<div areas><div>',
         }
       },
-      url: '^/'
+      url: '/'
     });
   })
   .directive('areas', function () {
@@ -28,7 +28,7 @@ angular.module('navEditorApp')
       controllerAs: 'areaCtrl'
     };
   })
-  .controller('AreaCtrl', function(AreaService, ModalService, $stateParams) {
+  .controller('AreaCtrl', function(AreaService, ModalService, $stateParams, $state) {
     AreaService.getAreas().then(function(areas) {
       this.areas = areas;
     }.bind(this));
@@ -37,6 +37,10 @@ angular.module('navEditorApp')
     this.remove = function(area) {
       ModalService.remove('area', area).then(function() {
         AreaService.removeArea(area);
+        if (area.Id === $stateParams.areaid) {
+          $state.go('area');
+        }
+
       });
     };
 
