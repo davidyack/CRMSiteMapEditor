@@ -7,38 +7,30 @@
  * # group
  */
 angular.module('navEditorApp')
-  .config(function($stateProvider) {
-    $stateProvider.state('area.group.subarea', {
-      views: {
-        'subarea': {
-          template: '<div subarea><div>',
-        }
-      },
-      url: '^/group/:areaid/:groupid'
-    });
-  })
-  .controller('SubAreaCtrl', function(AreaService, ModalService, $stateParams) {
-    AreaService.getSubAreas($stateParams.areaid, $stateParams.groupid).then(function(subareas) {
+  .controller('SubAreaCtrl', function(AreaService, ModalService, $stateParams, $scope) {
+    AreaService.getSubAreas($stateParams.areaid, $scope.group.Id).then(function(subareas) {
       this.subareas = subareas;
     }.bind(this));
     this.$stateParams = $stateParams;
 
     this.remove = function(subArea) {
       ModalService.remove('sub area', subArea).then(function() {
-        AreaService.removeSubArea($stateParams.areaid, $stateParams.groupid, subArea);
+        AreaService.removeSubArea($stateParams.areaid, $scope.group.Id, subArea);
       });
     };
 
     this.update = function(oldSubArea) {
       ModalService.update('sub area', oldSubArea).then(function(newSubArea) {
-        AreaService.updateSubArea($stateParams.areaid, $stateParams.groupid, oldSubArea, newSubArea);
+        AreaService.updateSubArea($stateParams.areaid, $scope.group.Id, oldSubArea, newSubArea);
       });
     };
 
   })
-  .directive('subarea', function () {
+  .directive('subareas', function () {
     return {
-      scope: {},
+      scope: {
+        group: '='
+      },
       replace: true,
       templateUrl: 'views/subarea.view.html',
       controller: 'SubAreaCtrl',

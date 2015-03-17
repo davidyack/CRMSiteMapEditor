@@ -11,7 +11,7 @@ angular.module('navEditorApp')
     $stateProvider.state('area.group', {
       views: {
         'groups': {
-          template: '<div group><div>',
+          template: '<groups></groups>',
         }
       },
       url: '^/group/:areaid'
@@ -39,7 +39,7 @@ angular.module('navEditorApp')
     };
 
   })
-  .directive('group', function () {
+  .directive('groups', function () {
     return {
       scope: {},
       replace: true,

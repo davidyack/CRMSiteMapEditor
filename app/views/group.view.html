@@ -1,22 +1,22 @@
 <div class="panel panel-default groups">
-  <div class="col-lg-12 voffset">
 
-    <!-- Split button -->
-    <div class="btn-group roffset" ng-repeat="group in groupCtrl.groups">
-      <button ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
-        ui-sref="area.group.subarea({areaid: groupCtrl.$stateParams.areaid, groupid: group.Id})" type="button" class="btn">{{group.Title}}</button>
-      <button ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
-        type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span>
-        <span class="sr-only">Toggle Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a ng-click="groupCtrl.update(group)">Edit</a></li>
-        <li><a ng-click="groupCtrl.remove(group)">Remove</a></li>
-      </ul>
+    <div class="col-lg-3 col-md-4 col-sm-6 voffset" ng-repeat="group in groupCtrl.groups">
+      <!-- Split button -->
+      <div class="btn-group roffset">
+        <button ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
+          type="button" class="btn">{{group.Title}}</button>
+        <button ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
+          type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="groupCtrl.update(group)">Edit</a></li>
+          <li><a ng-click="groupCtrl.remove(group)">Remove</a></li>
+        </ul>
+      </div>
+      <subareas group="group"></subareas>
     </div>
-  </div>
-  <div ui-view='subarea'></div>
 </div>
 
 
