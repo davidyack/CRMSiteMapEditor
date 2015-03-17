@@ -16,7 +16,7 @@ angular.module('navEditorApp')
           template: '<div areas><div>',
         }
       },
-      url: '/'
+      url: ''
     });
   })
   .directive('areas', function () {

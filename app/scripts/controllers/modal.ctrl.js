@@ -11,8 +11,10 @@ angular.module('navEditorApp')
   .controller('ModalAddCtrl', function($scope, $modalInstance, entityType) {
     $scope.entityType = entityType;
 
-    $scope.ok = function() {
-      $modalInstance.close($scope.entity);
+    $scope.ok = function(isValid) {
+      if (isValid) {
+        $modalInstance.close($scope.entity);
+      }
     };
 
     $scope.cancel = function() {
@@ -23,8 +25,10 @@ angular.module('navEditorApp')
     $scope.entityType = entityType;
     $scope.newEntity = angular.extend({}, oldEntity);
 
-    $scope.ok = function() {
-      $modalInstance.close($scope.newEntity);
+    $scope.ok = function(isValid) {
+      if (isValid) {
+        $modalInstance.close($scope.newEntity);
+      }
     };
 
     $scope.cancel = function() {
