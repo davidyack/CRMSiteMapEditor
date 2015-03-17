@@ -3,8 +3,12 @@
     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Add <span class="caret"></span></a>
     <ul class="dropdown-menu" role="menu">
       <li><a ng-click="actionsCtrl.addArea()">Add area</a></li>
-      <li ng-class="{disabled: actionsCtrl.$stateParams.areaid === undefined}"><a ng-click="actionsCtrl.addGroup()">Add group</a></li>
-      <li ng-class="{disabled: actionsCtrl.$stateParams.groupid === undefined}"><a ng-click="actionsCtrl.addSubArea()">Add sub area</a></li>
+      <li ng-class="{disabled: actionsCtrl.$stateParams.areaid === undefined}">
+        <a ng-click="(actionsCtrl.$stateParams.areaid === undefined) || actionsCtrl.addGroup()">Add group</a>
+      </li>
+      <li ng-class="{disabled: actionsCtrl.$stateParams.groupid === undefined}">
+        <a ng-click="(actionsCtrl.$stateParams.groupid === undefined) || actionsCtrl.addSubArea()">Add sub area</a>
+      </li>
     </ul>
   </li>
   <li><button class="btn btn-default navbar-btn" ng-click="actionsCtrl.save()">Save</button></li>

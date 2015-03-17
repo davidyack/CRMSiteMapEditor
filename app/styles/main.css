@@ -6,4 +6,7 @@
 .voffset  { margin-top: 15px; }
 .roffset {margin-right: 15px;}
 
+a:hover {
+  cursor:pointer;
+}
 

@@ -18,11 +18,25 @@ angular.module('navEditorApp')
       controllerAs: 'areaCtrl'
     };
   })
-  .controller('AreaCtrl', function(AreaService, $stateParams) {
+  .controller('AreaCtrl', function(AreaService, ModalService, $stateParams) {
     AreaService.getAreas().then(function(areas) {
       this.areas = areas;
     }.bind(this));
     this.$stateParams = $stateParams;
+
+    this.remove = function(area) {
+      ModalService.remove('area', area).then(function() {
+        AreaService.removeArea(area);
+      });
+    };
+
+    this.update = function(oldArea) {
+      ModalService.update('area', oldArea).then(function(newArea) {
+        AreaService.updateArea(oldArea, newArea);
+      });
+    };
+
+
   });
 
 
