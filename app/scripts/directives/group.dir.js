@@ -26,15 +26,21 @@ angular.module('navEditorApp')
     this.remove = function(group) {
       ModalService.remove('group', group).then(function() {
         AreaService.removeGroup($stateParams.areaid, group);
-        if (group.Id === $stateParams.groupid) {
-          $state.go('area.group', {areaid: $stateParams.areaid});
-        }
+        // if (group.Id === $stateParams.groupid) {
+        //   $state.go('area.group', {areaid: $stateParams.areaid});
+        // }
       });
     };
 
     this.update = function(oldGroup) {
       ModalService.update('group', oldGroup).then(function(newGroup) {
         AreaService.updateGroup($stateParams.areaid, oldGroup, newGroup);
+      });
+    };
+
+    this.addSubArea = function(group) {
+      ModalService.add('sub area').then(function(subarea) {
+        AreaService.addSubArea($stateParams.areaid, group.Id, subarea);
       });
     };
 

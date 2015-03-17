@@ -50,6 +50,12 @@ angular.module('navEditorApp')
       });
     };
 
+    this.addGroup = function(area) {
+      ModalService.add('group').then(function(group) {
+        AreaService.addGroup(area.Id, group);
+      });
+    };
+
 
   });
 

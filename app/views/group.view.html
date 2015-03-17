@@ -3,14 +3,15 @@
     <div class="col-lg-3 col-md-4 col-sm-6 voffset" ng-repeat="group in groupCtrl.groups">
       <!-- Split button -->
       <div class="btn-group roffset">
-        <button ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
-          type="button" class="btn">{{group.Title}}</button>
-        <button ng-class="{'btn-default': groupCtrl.$stateParams.groupid !== group.Id}"
-          type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <button
+          type="button" class="btn btn-primary">{{group.Title}}</button>
+        <button
+          type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <span class="caret"></span>
           <span class="sr-only">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="groupCtrl.addSubArea(group)">Add sub area</a></li>
           <li><a ng-click="groupCtrl.update(group)">Edit</a></li>
           <li><a ng-click="groupCtrl.remove(group)">Remove</a></li>
         </ul>

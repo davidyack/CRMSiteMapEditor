@@ -28,16 +28,4 @@ angular.module('navEditorApp')
         AreaService.addArea(area);
       });
     };
-
-    this.addGroup = function() {
-      ModalService.add('group').then(function(group) {
-        AreaService.addGroup($stateParams.areaid, group);
-      });
-    };
-
-    this.addSubArea = function() {
-      ModalService.add('sub area').then(function(subarea) {
-        AreaService.addSubArea($stateParams.areaid, $stateParams.groupid, subarea);
-      });
-    };
   });
