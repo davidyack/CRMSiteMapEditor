@@ -1,6 +1,6 @@
 {
     "Areas": [{
-        "Title": "Long long long Area 1",
+        "Title": "Long long long Long long long Area 1",
         "Id": "Area1",
         "Groups": [{
             "Title": "Long long long Group 1_1",
@@ -142,30 +142,6 @@
     }, {
         "Title": "Area 6",
         "Id": "Area6",
-        "Groups": [{
-            "Title": "Group 1",
-            "Id": "Group1",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }, {
-            "Title": "Group 2",
-            "Id": "Group2",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }]
-    }, {
-        "Title": "Area 7",
-        "Id": "Area7",
         "Groups": [{
             "Title": "Group 1",
             "Id": "Group1",

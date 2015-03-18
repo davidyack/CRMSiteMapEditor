@@ -1,39 +1,9 @@
 <div>
   <div>
     <div class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-
-          <a class="navbar-brand" ui-sref="area">navEditor</a>
-        </div>
-
+      <div class="container">
         <div class="collapse navbar-collapse" id="js-navbar-collapse">
           <ul class="nav navbar-nav">
-            <li ng-repeat="area in areaCtrl.areas">
-
-              <!-- Split button -->
-              <div class="btn-group roffset">
-                <button ng-class="{'btn-default': areaCtrl.$stateParams.areaid !== area.Id}"
-                  ui-sref="area.group({areaid: area.Id})" type="button" class="btn navbar-btn">{{area.Title}}</button>
-                <button ng-class="{'btn-default': areaCtrl.$stateParams.areaid !== area.Id}"
-                  type="button" class="btn dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">
-                  <span class="caret"></span>
-                  <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a ng-click="areaCtrl.addGroup(area)">Add group</a></li>
-                  <li><a ng-click="areaCtrl.update(area)">Edit</a></li>
-                  <li><a ng-click="areaCtrl.remove(area)">Remove</a></li>
-                </ul>
-              </div>
-            </li>
           </ul>
           <div actions></div>
         </div>
@@ -41,7 +11,33 @@
     </div>
   </div>
 
-  <div class="container-fluid">
+
+  <div class='container'>
+    <div class="row entities" >
+      <div ng-repeat="area in areaCtrl.areas" class='entities__frame col-lg-2 col-md-3 col-sm-4 col-xs-6' draggable="true">
+        <div class='entity area-entity bg-info' ng-class= "{'bg-danger': areaCtrl.$stateParams.areaid === area.Id}">
+          <a class="entity-link" ui-sref="area.group({areaid: area.Id})">
+            <span class="entity-link__frame">{{area.Title}}</span>
+          </a>
+          <div class="entity-menu-icon"></div>
+          <div class="entity-menu-container">
+            <div class="entity-menu-frame">
+              <a ui-sref="area.group({areaid: area.Id})"
+                  class="entity-menu-link dropdown-toggle"
+                  data-toggle="dropdown" aria-expanded="false"></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a ng-click="areaCtrl.addGroup(area)">Add group</a></li>
+                <li><a ng-click="areaCtrl.update(area)">Edit</a></li>
+                <li><a ng-click="areaCtrl.remove(area)">Remove</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
     <div ui-view="groups"></div>
   </div>
 </div>

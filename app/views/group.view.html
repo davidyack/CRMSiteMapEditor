@@ -1,24 +1,24 @@
-<div class="panel panel-default groups">
-
-    <div class="col-lg-3 col-md-4 col-sm-6 voffset" ng-repeat="group in groupCtrl.groups">
-      <!-- Split button -->
-      <div class="btn-group roffset">
-        <button
-          type="button" class="btn btn-primary">{{group.Title}}</button>
-        <button
-          type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a ng-click="groupCtrl.addSubArea(group)">Add sub area</a></li>
-          <li><a ng-click="groupCtrl.update(group)">Edit</a></li>
-          <li><a ng-click="groupCtrl.remove(group)">Remove</a></li>
-        </ul>
+<div class="panel panel-default entities-panel">
+  <div class="row entities">
+    <div ng-repeat="group in groupCtrl.groups" class='entities__frame col-lg-2 col-md-3 col-sm-4 col-xs-6' draggable="true">
+      <div class='entity group-entity'>
+        <span class="entity-link__frame">{{group.Title}}</span>
+        <div class="entity-menu-icon"></div>
+        <div class="entity-menu-container">
+          <div class="entity-menu-frame">
+            <a class="entity-menu-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a ng-click="groupCtrl.addSubArea(group)">Add sub area</a>
+              </li>
+              <li><a ng-click="groupCtrl.update(group)">Edit</a>
+              </li>
+              <li><a ng-click="groupCtrl.remove(group)">Remove</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <subareas group="group"></subareas>
     </div>
+  </div>
 </div>
-
-
-

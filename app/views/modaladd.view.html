@@ -1,21 +1,21 @@
 <form name="form" novalidate>
-<div class="modal-header">
-  <h3 class="modal-title">Add {{entityType}}</h3>
-</div>
-<div class="modal-body">
-  <div class="form-group" ng-class="{'has-error': submitted && form.entityId.$error.required}">
-    <label for="entityId">ID</label>
-    <input required ng-model='entity.Id' name="entityId" type="text" class="form-control" id="entityId" placeholder="Enter id">
-    <p class="help-block" ng-if="submitted && form.entityId.$error.required">The ID is required</p>
+  <div class="modal-header">
+    <h3 class="modal-title">Add {{entityType}}</h3>
   </div>
-  <div class="form-group" ng-class="{'has-error': submitted && form.entityTitle.$error.required}">
-    <label for="entityTitle">Title</label>
-    <input required ng-model='entity.Title' name="entityTitle" type="text" class="form-control" id="entityTitle" placeholder="Enter title">
-    <p class="help-block" ng-if="submitted && form.entityTitle.$error.required">The title is required</p>
+  <div class="modal-body">
+    <div class="form-group" ng-class="{'has-error': submitted && form.entityId.$error.required}">
+      <label for="entityId">ID</label>
+      <input required ng-model='entity.Id' name="entityId" type="text" class="form-control" id="entityId" placeholder="Enter id">
+      <p class="help-block" ng-if="submitted && form.entityId.$error.required">The ID is required</p>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.entityTitle.$error.required}">
+      <label for="entityTitle">Title</label>
+      <input required ng-model='entity.Title' name="entityTitle" type="text" class="form-control" id="entityTitle" placeholder="Enter title">
+      <p class="help-block" ng-if="submitted && form.entityTitle.$error.required">The title is required</p>
+    </div>
   </div>
-</div>
-<div class="modal-footer">
-  <button type="submit" class="btn btn-primary" ng-click="submitted=true; ok(form.$valid)">Add</button>
-  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-</div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="submitted=true; ok(form.$valid)">Add</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  </div>
 </form>

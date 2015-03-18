@@ -1,12 +1,98 @@
-.groups {
-  height: 600px;
+.entities-panel {
+  /*min-height: 600px;*/
   background-color: #f8f8f8;
 }
-
-.voffset  { margin-top: 15px; }
-.roffset {margin-right: 15px;}
-
+.voffset {
+  margin-top: 15px;
+}
+.roffset {
+  margin-right: 15px;
+}
 a:hover {
-  cursor:pointer;
+  cursor: pointer;
+}
+.entities {
+  box-sizing: border-box;
+}
+.entities__frame {
+  padding: 20px;
+}
+.entity {
+  text-align: center;
+  position: relative;
 }
 
+.area-entity {
+  height: 150px;
+  line-height: 150px;
+}
+.subarea-entity {
+  height: 100px;
+  line-height: 100px;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.group-entity {
+  height: 100px;
+  line-height: 100px;
+  background-color: #ccc;
+  border: 1px solid #e7e7e7;
+}
+
+.entity:hover .entity-menu-icon {
+  display: block;
+}
+
+.entity-link {
+  color: #333;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-decoration: none;
+  /* No underlines on the link */
+  /*z-index: 10;  Places the link above everything else in the div */
+}
+
+.entity-link__frame {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.entity-menu-icon {
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+  border-bottom: 10px solid #337ab7;
+  border-right: 10px solid #337ab7;
+  border-top: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+
+.entity-menu-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.entity-menu-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.entity-menu-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
