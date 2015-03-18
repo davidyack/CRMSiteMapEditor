@@ -1,7 +1,7 @@
 <div>
   <div>
     <div class="navbar navbar-default" role="navigation">
-      <div class="container">
+      <div class="container-fluid">
         <div class="collapse navbar-collapse" id="js-navbar-collapse">
           <ul class="nav navbar-nav">
           </ul>
@@ -12,10 +12,11 @@
   </div>
 
 
-  <div class='container'>
+  <div class='container-fluid'>
     <div class="row entities" >
       <div ng-repeat="area in areaCtrl.areas" class='entities__frame col-lg-2 col-md-3 col-sm-4 col-xs-6' draggable="true">
-        <div class='entity area-entity bg-info' ng-class= "{'bg-danger': areaCtrl.$stateParams.areaid === area.Id}">
+        <div class='entity area-entity'
+          ng-class="{'area-entity--selected': areaCtrl.$stateParams.areaid === area.Id}">
           <a class="entity-link" ui-sref="area.group({areaid: area.Id})">
             <span class="entity-link__frame">{{area.Title}}</span>
           </a>
@@ -37,7 +38,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container-fluid">
     <div ui-view="groups"></div>
   </div>
 </div>
