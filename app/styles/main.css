@@ -27,15 +27,15 @@ a:hover {
   line-height: 150px;
 }
 .subarea-entity {
-  height: 100px;
-  line-height: 100px;
+  height: 50px;
+  line-height: 50px;
   background-color: white;
   border: 1px solid #ddd;
 }
 
 .group-entity {
-  height: 100px;
-  line-height: 100px;
+  height: 50px;
+  line-height: 50px;
   background-color: #ccc;
   border: 1px solid #e7e7e7;
 }
