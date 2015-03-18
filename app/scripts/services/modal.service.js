@@ -9,32 +9,6 @@
  */
 angular.module('navEditorApp')
   .factory('ModalService', function($modal) {
-    var openAddModal = function(entityType) {
-      return $modal.open({
-        templateUrl: '/views/modaladd.view.html',
-        controller: 'ModalAddCtrl',
-        resolve: {
-          entityType: function() {
-            return entityType;
-          }
-        }
-      });
-    };
-
-    var openUpdateModal = function(entityType, oldEntity) {
-      return $modal.open({
-        templateUrl: '/views/modalupdate.view.html',
-        controller: 'ModalUpdateCtrl',
-        resolve: {
-          entityType: function() {
-            return entityType;
-          },
-          oldEntity: function() {
-            return oldEntity;
-          }
-        }
-      });
-    };
 
     var openRemoveModal = function(entityType, entity) {
       return $modal.open({
@@ -51,15 +25,54 @@ angular.module('navEditorApp')
       });
     };
 
+    var areaModal = function(oldEntity) {
+      return $modal.open({
+        templateUrl: '/views/area.modal.html',
+        controller: 'ModalUpdateCtrl',
+        resolve: {
+          oldEntity: function() {
+            return oldEntity;
+          }
+        }
+      });
+    };
+
+    var subAreaModal = function(oldEntity) {
+      return $modal.open({
+        templateUrl: '/views/subarea.modal.html',
+        controller: 'ModalUpdateCtrl',
+        resolve: {
+          oldEntity: function() {
+            return oldEntity;
+          }
+        }
+      });
+    };
+
+    var groupModal = function(oldEntity) {
+      return $modal.open({
+        templateUrl: '/views/group.modal.html',
+        controller: 'ModalUpdateCtrl',
+        resolve: {
+          oldEntity: function() {
+            return oldEntity;
+          }
+        }
+      });
+    };
+
     return {
-      add: function(entityType) {
-        return openAddModal(entityType).result;
+      area: function(oldEntity) {
+        return areaModal(oldEntity).result;
+      },
+      group: function(oldEntity) {
+        return groupModal(oldEntity).result;
+      },
+      subArea: function(oldEntity) {
+        return subAreaModal(oldEntity).result;
       },
       remove: function(entityType, entity) {
         return openRemoveModal(entityType, entity).result;
       },
-      update: function(entityType, oldEntity) {
-        return openUpdateModal(entityType, oldEntity).result;
-      }
     };
   });

@@ -45,14 +45,14 @@ angular.module('navEditorApp')
     };
 
     this.update = function(oldArea) {
-      ModalService.update('area', oldArea).then(function(newArea) {
+      ModalService.area(oldArea).then(function(newArea) {
         AreaService.updateArea(oldArea, newArea);
       });
     };
 
     this.addGroup = function(area) {
-      ModalService.add('group').then(function(group) {
-        AreaService.addGroup(area.Id, group);
+      ModalService.group().then(function(newGroup) {
+        AreaService.addGroup(area.Id, newGroup);
       });
     };
 

@@ -24,8 +24,8 @@ angular.module('navEditorApp')
     };
 
     this.addArea = function() {
-      ModalService.add('area').then(function(area) {
-        AreaService.addArea(area);
+      ModalService.area().then(function(newArea) {
+        AreaService.addArea(newArea);
       });
     };
   });

@@ -1,167 +1,446 @@
 {
-    "Areas": [{
-        "Title": "Long long long Long long long Area 1",
-        "Id": "Area1",
-        "Groups": [{
-            "Title": "Long long long Group 1_1",
-            "Id": "Group1_1",
-            "SubAreas": [{
-                "Title": "Long long long SubArea1_1_1",
-                "Id": "SubArea1_1_1"
-            }, {
-                "Title": "Long long long SubArea1_1_2",
-                "Id": "SubARea1_1_2"
-            }]
-        }, {
-            "Title": "Group 1_2",
-            "Id": "Group1_2",
-            "SubAreas": [{
-                "Title": "SubArea1_2_1",
-                "Id": "SubArea1_2_1"
-            }, {
-                "Title": "SubArea1_2_2",
-                "Id": "SubARea1_2_2"
-            }]
-        },{
-            "Title": "Long long long Group 1_3",
-            "Id": "Group1_3",
-            "SubAreas": [{
-                "Title": "Long long long SubArea1_3_1",
-                "Id": "SubArea1_3_1"
-            }, {
-                "Title": "Long long long SubArea1_3_2",
-                "Id": "SubARea1_3_2"
-            }]
-        }, {
-            "Title": "Group 1_4",
-            "Id": "Group1_4",
-            "SubAreas": [{
-                "Title": "SubArea1_4_1",
-                "Id": "SubArea1_4_1"
-            }, {
-                "Title": "SubArea1_4_2",
-                "Id": "SubARea1_4_2"
-            }]
-        }]
-    }, {
-        "Title": "Area 2",
-        "Id": "Area2",
-        "Groups": [{
-            "Title": "Group 1",
-            "Id": "Group1",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }, {
-            "Title": "Group 2",
-            "Id": "Group2",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }]
-    }, {
-        "Title": "Area 3",
-        "Id": "Area3",
-        "Groups": [{
-            "Title": "Group 1",
-            "Id": "Group1",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }, {
-            "Title": "Group 2",
-            "Id": "Group2",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }]
-    }, {
-        "Title": "Area 4",
-        "Id": "Area4",
-        "Groups": [{
-            "Title": "Group 1",
-            "Id": "Group1",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }, {
-            "Title": "Group 2",
-            "Id": "Group2",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }]
-    }, {
-        "Title": "Area 5",
-        "Id": "Area5",
-        "Groups": [{
-            "Title": "Group 1",
-            "Id": "Group1",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }, {
-            "Title": "Group 2",
-            "Id": "Group2",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }]
-    }, {
-        "Title": "Area 6",
-        "Id": "Area6",
-        "Groups": [{
-            "Title": "Group 1",
-            "Id": "Group1",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }, {
-            "Title": "Group 2",
-            "Id": "Group2",
-            "SubAreas": [{
-                "Title": "SubArea1",
-                "Id": "SubArea1"
-            }, {
-                "Title": "SubArea2",
-                "Id": "SubARea2"
-            }]
-        }]
-    }]
+    "Areas": [
+        {
+            "Title": "Sales",
+            "Id": "Area1",
+            "Groups": [
+                {
+                    "Title": "My Work",
+                    "Id": "Group1_1",
+                    "SubAreas": [
+                        {
+                            "Title": "Dashboards",
+                            "Id": "SubArea1_1_1"
+                        },
+                        {
+                            "Title": "What's New",
+                            "Id": "SubARea1_1_2"
+                        },
+
+                        {
+                            "Title": "Activities",
+                            "Id": "SubARea1_1_2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Customers",
+                    "Id": "Group1_2",
+                    "SubAreas": [
+                        {
+                            "Title": "Accounts",
+                            "Id": "SubArea1_2_1"
+                        },
+                        {
+                            "Title": "Contacts",
+                            "Id": "SubARea1_2_2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Sales",
+                    "Id": "Group1_3",
+                    "SubAreas": [
+                        {
+                            "Title": "Leads",
+                            "Id": "SubArea1_3_1"
+                        },
+                        {
+                            "Title": "Opportunties",
+                            "Id": "SubARea1_3_2"
+                        },
+                        {
+                            "Title": "Competitors",
+                            "Id": "SubARea1_3_2"
+                        }
+
+                    ]
+                },
+                {
+                    "Title": "Collateral",
+                    "Id": "Group1_3",
+                    "SubAreas": [
+                        {
+                            "Title": "Quotes",
+                            "Id": "SubArea1_3_1"
+                        },
+                        {
+                            "Title": "Orders",
+                            "Id": "SubARea1_3_2"
+                        },
+                        {
+                            "Title": "Invoices",
+                            "Id": "SubARea1_3_2"
+                        },
+                        {
+                            "Title": "Products",
+                            "Id": "SubARea1_3_2"
+                        },
+                        {
+                            "Title": "Sales Literature",
+                            "Id": "SubARea1_3_2"
+                        }
+
+                    ]
+                },
+                {
+                    "Title": "Marketing",
+                    "Id": "Group1_4",
+                    "SubAreas": [
+                        {
+                            "Title": "Marketing Lists",
+                            "Id": "SubArea1_4_1"
+                        },
+                        {
+                            "Title": "Quick Campaigns",
+                            "Id": "SubARea1_4_2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Goals",
+                    "Id": "Group1_4",
+                    "SubAreas": [
+                        {
+                            "Title": "Goals",
+                            "Id": "Goals"
+                        },
+                        {
+                            "Title": "Goal Metrics",
+                            "Id": "SubARea1_4_2"
+                        },
+                        {
+                            "Title": "Rollup Queries",
+                            "Id": "SubARea1_4_2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Tools",
+                    "Id": "Group1_4",
+                    "SubAreas": [
+                        {
+                            "Title": "Reports",
+                            "Id": "SubArea1_4_1"
+                        },
+                        {
+                            "Title": "Alerts",
+                            "Id": "SubARea1_4_2"
+                        },
+                        {
+                            "Title": "Calendar",
+                            "Id": "SubARea1_4_2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Title": "Service",
+            "Id": "Area2",
+            "Groups": [
+                {
+                    "Title": "My Work",
+                    "Id": "Area2Group1",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Customers",
+                    "Id": "Area2Group2",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Collateral",
+                    "Id": "Area2Group3",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Goals",
+                    "Id": "Area2Group2",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Tools",
+                    "Id": "Area2Group2",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Title": "Marketing",
+            "Id": "Area3",
+            "Groups": [
+                {
+                    "Title": "My Work",
+                    "Id": "Area3Group1",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Customers",
+                    "Id": "Area3Group2",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+                ,
+                {
+                    "Title": "Marketing",
+                    "Id": "Area3Group3",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+                ,
+                {
+                    "Title": "Collateral",
+                    "Id": "Area3Group4",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+                ,
+                {
+                    "Title": "Tools",
+                    "Id": "Area3Group5",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Title": "Settings",
+            "Id": "Area4",
+            "Groups": [
+                {
+                    "Title": "Business",
+                    "Id": "Area4Group1",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Customization",
+                    "Id": "Area4Group2",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+                ,
+                {
+                    "Title": "System",
+                    "Id": "Area4Group3",
+                    "SubAreas": [
+                        {
+                            "Title": "Administration",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "Security",
+                            "Id": "SubARea2"
+                        }
+                        ,
+                        {
+                            "Title": "Data Management",
+                            "Id": "SubARea3"
+                        }
+                        ,
+                        {
+                            "Title": "System Jobs",
+                            "Id": "SubARea4"
+                        }
+                        ,
+                        {
+                            "Title": "Document Manageme...",
+                            "Id": "SubARea5"
+                        }
+                        ,
+                        {
+                            "Title": "Auditing",
+                            "Id": "SubARea6"
+                        }
+                        ,
+                        {
+                            "Title": "Email Configuration",
+                            "Id": "SubARea7"
+                        }
+                        ,
+                        {
+                            "Title": "Activity Feeds Configu...",
+                            "Id": "SubARea2"
+                        }
+                        ,
+                        {
+                            "Title": "Activity Feeds Rules",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Process Center",
+                    "Id": "Area4Group4",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Title": "Time Tracking",
+            "Id": "Area5",
+            "Groups": [
+                {
+                    "Title": "Group 1",
+                    "Id": "Area5Group1",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                },
+                {
+                    "Title": "Group 2",
+                    "Id": "Area5Group2",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Title": "Help",
+            "Id": "Area6",
+            "Groups": [
+                {
+                    "Title": "Help",
+                    "Id": "Area6Group1",
+                    "SubAreas": [
+                        {
+                            "Title": "SubArea1",
+                            "Id": "SubArea1"
+                        },
+                        {
+                            "Title": "SubArea2",
+                            "Id": "SubARea2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }

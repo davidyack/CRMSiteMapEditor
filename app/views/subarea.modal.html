@@ -1,0 +1,60 @@
+<form name="form" novalidate>
+  <div class="modal-header">
+    <h3 class="modal-title">
+    <span ng-if="oldEntity !== undefined" >Edit sub area</span>
+    <span ng-if="oldEntity === undefined" >Add sub area</span>
+    </h3>
+  </div>
+  <div class="modal-body">
+    <div class="form-group" ng-class="{'has-error': submitted && form.entityId.$error.required}">
+      <label for="entityId">ID</label>
+      <input required ng-model='newEntity.Id' name="entityId" type="text" class="form-control" id="entityId" placeholder="Enter id">
+      <p class="help-block" ng-if="submitted && form.entityId.$error.required">The ID is required</p>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.entityTitle.$error.required}">
+      <label for="entityTitle">Title</label>
+      <input required ng-model='newEntity.Title' name="entityTitle" type="text" class="form-control" id="entityTitle" placeholder="Enter title">
+      <p class="help-block" ng-if="submitted && form.entityTitle.$error.required">The title is required</p>
+    </div>
+    <div class="form-group">
+      <label for="entityDescription">Description</label>
+      <textarea ng-model='newEntity.Description' name="entityDescription" class="form-control" rows="3"
+        id="entityDescription" placeholder="Enter Description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="entityEntity">Entity</label>
+      <input ng-model='newEntity.Entity' name="entityEntity" type="text" class="form-control" id="entityEntity" placeholder="Enter entity">
+    </div>
+    <div class="checkbox">
+      <label>
+        <input ng-model="newEntity.AvailableOffline" type="checkbox">Available Offline</input>
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input ng-model="newEntity.PassParameters" type="checkbox">Pass Parameters</input>
+      </label>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.entityUrl.$error.url}">
+      <label for="entityUrl">Url</label>
+      <input type = "url" ng-model='newEntity.Url' name="entityUrl" type="text" class="form-control" id="entityUrl" placeholder="Enter Url">
+      <p class="help-block" ng-if="submitted && form.entityUrl.$error.url">Please specify a valid URL</p>
+    </div>
+    <div class="form-group">
+      <label for="entityIcon">Icon</label>
+      <input ng-model='newEntity.Icon' name="entityIcon" type="text" class="form-control" id="entityIcon" placeholder="Enter Icon">
+    </div>
+    <div class="form-group">
+      <label for="entityClient">Client</label>
+      <select name="entityClient" class="form-control"
+        ng-model="newEntity.Client"
+        ng-init="newEntity.Client = newEntity.Client || 'All'"
+        ng-options="client for client in ['All','Outlook','OutlookLaptopClient','OutlookWorkstationClient','Web']" >
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="submitted=true; ok(form.$valid)">Save</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  </div>
+</form>

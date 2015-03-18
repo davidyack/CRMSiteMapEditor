@@ -20,7 +20,7 @@ angular.module('navEditorApp')
     };
 
     this.update = function(oldSubArea) {
-      ModalService.update('sub area', oldSubArea).then(function(newSubArea) {
+      ModalService.subArea(oldSubArea).then(function(newSubArea) {
         AreaService.updateSubArea($stateParams.areaid, $scope.group.Id, oldSubArea, newSubArea);
       });
     };
