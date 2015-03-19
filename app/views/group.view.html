@@ -1,20 +1,24 @@
 <div class="panel panel-default entities-panel">
   <div class="row entities">
-    <div ng-repeat="group in groupCtrl.groups" class='entities__frame col-lg-2 col-md-3 col-sm-4 col-xs-6' draggable="true">
-      <div class='entity group-entity'>
-        <span class="entity-link__frame">{{group.Title}}</span>
-        <div class="entity-menu-icon"></div>
-        <div class="entity-menu-container">
-          <div class="entity-menu-frame">
-            <a class="entity-menu-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
-            <ul class="dropdown-menu pull-right" role="menu">
-              <li><a ng-click="groupCtrl.addSubArea(group)">Add sub area</a>
-              </li>
-              <li><a ng-click="groupCtrl.update(group)">Edit</a>
-              </li>
-              <li><a ng-click="groupCtrl.remove(group)">Remove</a>
-              </li>
-            </ul>
+    <div ng-repeat="group in groupCtrl.groups"
+        class='entities__frame col-lg-2 col-md-3 col-sm-4 col-xs-6'>
+      <div ng-drop-success="groupCtrl.onDropComplete($index, $data, $event)"
+        ng-drop="true">
+        <div class='entity group-entity' ng-drag="true" ng-drag-data="group">
+          <span class="entity-link__frame">{{group.Title}}</span>
+          <div class="entity-menu-icon"></div>
+          <div class="entity-menu-container">
+            <div class="entity-menu-frame">
+              <a class="entity-menu-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li><a ng-click="groupCtrl.addSubArea(group)">Add sub area</a>
+                </li>
+                <li><a ng-click="groupCtrl.update(group)">Edit</a>
+                </li>
+                <li><a ng-click="groupCtrl.remove(group)">Remove</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

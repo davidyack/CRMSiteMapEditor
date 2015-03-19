@@ -10,84 +10,119 @@
 angular.module('navEditorApp')
   .factory('AreaService', function($http, _) {
 
-    var def = $http.get('/api/areas/');
+    var _def = $http({
+      method: 'GET',
+      url: '/api/areas/',
+      transformResponse: function(data, headersGetter, status) {
+        var ret = {};
+        var res = JSON.parse(data);
+        ret.Indexes = {};
+
+        ret.Areas = _.map(res.Areas, function(area) {
+          return angular.extend(area, {
+            __AreaId__: area.Id,
+            Groups: _.map(area.Groups, function(group) {
+              return angular.extend(group, {
+                __AreaId__: area.Id,
+                __GroupId__: group.Id,
+                SubAreas: _.map(group.SubAreas, function(subArea) {
+                  return angular.extend(subArea, {
+                    __SubAreaId__: subArea.Id,
+                    __AreaId__: area.Id,
+                    __GroupId__: group.Id
+                  });
+                })
+              });
+            })
+          });
+        });
+        return ret;
+      }
+    });
+
+    var _getGroups = function(areaId) {
+      return _def.then(function(response) {
+        var area = _.findWhere(response.data.Areas, {__AreaId__: areaId});
+        return area.Groups || (area.Groups = []);
+      });
+    };
+
+    var _getSubAreas = function(areaId, groupId) {
+      return _getGroups(areaId).then(function(groups) {
+        var group = _.findWhere(groups, {__GroupId__: groupId});
+        return group.SubAreas || (group.SubAreas = []);
+      });
+    };
+
 
     // Public API here
     return {
       getAreas: function() {
-        return def.then(function(response) {
+        return _def.then(function(response) {
           return response.data.Areas;
         });
       },
       addArea: function(area) {
-        return def.then(function(response) {
+        return _def.then(function(response) {
           response.data.Areas.push(area);
         });
       },
       updateArea: function(oldArea, newArea) {
-        return def.then(function(response) {
+        return _def.then(function(response) {
           response.data.Areas[_.indexOf(response.data.Areas, oldArea)] = newArea;
         });
       },
       removeArea: function(area) {
-        return def.then(function(response) {
+        return _def.then(function(response) {
           response.data.Areas.splice(_.indexOf(response.data.Areas, area), 1);
         });
       },
 
       // GROUPS
       getGroups: function(areaId) {
-        return def.then(function(response) {
-          var area = _.findWhere(response.data.Areas, {Id: areaId});
-          return area.Groups || (area.Groups = []);
-        });
+        return _getGroups(areaId);
       },
       addGroup: function(areaId, group) {
-        def.then(function(response) {
-          _.findWhere(response.data.Areas, {Id: areaId}).Groups.push(group);
+        _getGroups(areaId).then(function(groups) {
+          groups.push(group);
         });
       },
-      updateGroup: function(areaId, oldGroup, newGroup) {
-        return def.then(function(response) {
-          var groups = _.findWhere(response.data.Areas, {Id: areaId}).Groups;
-          groups[_.indexOf(groups, oldGroup)] = newGroup;
+      updateGroup: function(group, newGroup) {
+        _getGroups(group.__AreaId__).then(function(groups) {
+          groups[_.indexOf(groups, group)] = newGroup;
         });
       },
-      removeGroup: function(areaId, group) {
-        return def.then(function(response) {
-          var groups = _.findWhere(response.data.Areas, {Id: areaId}).Groups;
+      removeGroup: function(group) {
+        _getGroups(group.__AreaId__).then(function(groups) {
           groups.splice(_.indexOf(groups, group), 1);
         });
       },
 
       // SUB AREAS
       getSubAreas: function(areaId, groupId) {
-        return def.then(function(response) {
-          var group = _.findWhere(_.findWhere(response.data.Areas, {Id: areaId}).Groups, {Id: groupId});
-          return group.SubAreas || (group.SubAreas = []);
+        return _getSubAreas(areaId, groupId).then(function(subAreas) {
+          return subAreas;
         });
       },
-      addSubArea: function(areaId, groupId, subArea) {
-        return def.then(function(response) {
-          _.findWhere(_.findWhere(response.data.Areas, {Id: areaId}).Groups, {Id: groupId}).SubAreas.push(subArea);
+      addSubArea: function(subArea) {
+        _getSubAreas(subArea).then(function(subAreas) {
+          subAreas.push(subArea);
         });
       },
-      updateSubArea: function(areaId, groupId, oldSubArea, newSubArea) {
-        return def.then(function(response) {
-          var subAreas = _.findWhere(_.findWhere(response.data.Areas, {Id: areaId}).Groups, {Id: groupId}).SubAreas;
-          subAreas[_.indexOf(subAreas, oldSubArea)] = newSubArea;
+      updateSubArea: function(subArea, newSubArea) {
+        _getSubAreas(subArea.__AreaId__, subArea.__GroupId__).then(function(subAreas) {
+          subAreas[_.indexOf(subAreas, subArea)] = newSubArea;
         });
       },
-      removeSubArea: function(areaId, groupId, subArea) {
-        return def.then(function(response) {
-          var subAreas = _.findWhere(_.findWhere(response.data.Areas, {Id: areaId}).Groups, {Id: groupId}).SubAreas;
-          subAreas.splice(_.indexOf(subAreas, subArea), 1);
+      removeSubArea: function(subArea) {
+        _getSubAreas(subArea.__AreaId__, subArea.__GroupId__).then(function(subAreas) {
+          subAreas.splice(_.indexOf(subAreas, subArea.data), 1);
         });
       },
 
 
       save: function() {
-        def.then(function(response) {
+        _def.then(function(response) {
           $http.post('/api/areas', response.data);
         });
       }

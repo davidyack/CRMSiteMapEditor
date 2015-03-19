@@ -1,11 +1,14 @@
 <div>
-  <div ng-repeat="subarea in subAreaCtrl.subareas" class=" voffset" draggable="true">
-    <div class='entity subarea-entity'>
+  <div ng-repeat="subarea in subAreaCtrl.subareas" class=" voffset"
+      ng-drop-success="subAreaCtrl.onDropComplete($index, $data, $event)"
+      ng-drop="true">
+    <div class='entity subarea-entity' ng-drag="true"
+      ng-drag-data="subarea">
       <span class="entity-link__frame">{{subarea.Title}}</span>
       <div class="entity-menu-icon"></div>
       <div class="entity-menu-container">
         <div class="entity-menu-frame">
-          <a class="entity-menu-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
+          <a class="entity-menu-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" draggable="false"></a>
           <ul class="dropdown-menu pull-right" role="menu">
             <li><a ng-click="subAreaCtrl.update(subarea)">Edit</a>
             </li>

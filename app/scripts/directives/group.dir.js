@@ -23,21 +23,29 @@ angular.module('navEditorApp')
     }.bind(this));
     this.$stateParams = $stateParams;
 
+    this.onDropComplete = function(index, obj, evt) {
+      var otherObj = this.groups[index];
+      var otherIndex = this.groups.indexOf(obj);
+      this.groups[index] = obj;
+      this.groups[otherIndex] = otherObj;
+      AreaService.updateGroups($stateParams.areaid, this.groups);
+    };
+
     this.remove = function(group) {
       ModalService.remove('group', group).then(function() {
-        AreaService.removeGroup($stateParams.areaid, group);
+        AreaService.removeGroup(group);
       });
     };
 
     this.update = function(oldGroup) {
       ModalService.group(oldGroup).then(function(newGroup) {
-        AreaService.updateGroup($stateParams.areaid, oldGroup, newGroup);
+        AreaService.updateGroup(oldGroup, newGroup);
       });
     };
 
     this.addSubArea = function(group) {
       ModalService.subArea().then(function(subarea) {
-        AreaService.addSubArea($stateParams.areaid, group.Id, subarea);
+        AreaService.addSubArea(group, subarea);
       });
     };
 

@@ -12,8 +12,8 @@ angular.module('navEditorApp')
   .config(function($stateProvider) {
     $stateProvider.state('area', {
       views: {
-        'areas': {
-          template: '<div areas><div>',
+        'main': {
+          templateUrl: 'views/main.view.html',
         }
       },
       url: ''
@@ -25,7 +25,12 @@ angular.module('navEditorApp')
       replace: true,
       templateUrl: 'views/area.view.html',
       controller: 'AreaCtrl',
-      controllerAs: 'areaCtrl'
+      controllerAs: 'areaCtrl',
+      link: function(scope, elem, attr, ctrl) {
+         elem.bind('dragstart', function(e) {
+            //do something here.
+         });
+      }
     };
   })
   .controller('AreaCtrl', function(AreaService, ModalService, $stateParams, $state) {
@@ -33,6 +38,14 @@ angular.module('navEditorApp')
       this.areas = areas;
     }.bind(this));
     this.$stateParams = $stateParams;
+
+    this.onDropComplete = function(index, obj, evt) {
+      var otherObj = this.areas[index];
+      var otherIndex = this.areas.indexOf(obj);
+      this.areas[index] = obj;
+      this.areas[otherIndex] = otherObj;
+      AreaService.updateAreas(this.areas);
+    };
 
     this.remove = function(area) {
       ModalService.remove('area', area).then(function() {
