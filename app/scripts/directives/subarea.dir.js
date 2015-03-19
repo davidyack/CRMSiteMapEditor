@@ -14,11 +14,9 @@ angular.module('navEditorApp')
     this.$stateParams = $stateParams;
 
     this.onDropComplete = function(index, obj, evt) {
-      var otherObj = this.subareas[index];
-      var otherIndex = this.subareas.indexOf(obj);
-      this.subareas[index] = obj;
-      this.subareas[otherIndex] = otherObj;
-      AreaService.updateSubAreas($stateParams.areaid, $scope.group.Id, this.subareas);
+      if (_.indexOf(this.subareas, obj) !== -1) {
+        AreaService.reorderSubArea(index, obj);
+      }
     };
 
     this.remove = function(subArea) {

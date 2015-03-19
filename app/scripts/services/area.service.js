@@ -54,6 +54,13 @@ angular.module('navEditorApp')
       }
     });
 
+
+    var _getAreas = function() {
+      return _def.then(function(response) {
+        return response.data.Areas;
+      });
+    };
+
     var _getGroups = function(areaId) {
       return _def.then(function(response) {
         var area = _.findWhere(response.data.Areas, {__AreaId__: areaId});
@@ -68,28 +75,51 @@ angular.module('navEditorApp')
       });
     };
 
+    var _isItAnArea = function(entity) {
+      return _.has(entity, '__AreaId__') &&
+            !_.has(entity, '__GroupId__') &&
+            !_.has(entity, '__SubAreaId__');
+    };
+
+    var _isItAGroup = function(entity) {
+      return _.has(entity, '__AreaId__') &&
+            _.has(entity, '__GroupId__') &&
+            !_.has(entity, '__SubAreaId__');
+    };
+
+    var _isItASubArea = function(entity) {
+      return _.has(entity, '__AreaId__') &&
+            _.has(entity, '__GroupId__') &&
+            _.has(entity, '__SubAreaId__');
+    };
 
     // Public API here
     return {
       getAreas: function() {
-        return _def.then(function(response) {
-          return response.data.Areas;
-        });
+        return _getAreas();
       },
       addArea: function(area) {
-        return _def.then(function(response) {
-          response.data.Areas.push(_mixinArea(area));
+        _getAreas().then(function(areas) {
+          areas.push(_mixinArea(area));
         });
       },
       updateArea: function(oldArea, newArea) {
-        return _def.then(function(response) {
-          response.data.Areas[_.indexOf(response.data.Areas, oldArea)] = newArea;
+        _getAreas().then(function(areas) {
+          areas[_.indexOf(areas, oldArea)] = newArea;
         });
       },
       removeArea: function(area) {
-        return _def.then(function(response) {
-          response.data.Areas.splice(_.indexOf(response.data.Areas, area), 1);
+        _getAreas().then(function(areas) {
+          areas.splice(_.indexOf(areas, area), 1);
         });
+      },
+      reorderArea: function(index, area) {
+        if (_isItAnArea(area)) {
+          _getAreas().then(function(areas) {
+            areas.splice(_.indexOf(areas, area), 1);
+            areas.splice(index, 0, area);
+          });
+        }
       },
 
       // GROUPS
@@ -110,6 +140,14 @@ angular.module('navEditorApp')
         _getGroups(group.__AreaId__).then(function(groups) {
           groups.splice(_.indexOf(groups, group), 1);
         });
+      },
+      reorderGroup: function(index, group) {
+        if (_isItAGroup(group)) {
+          _getGroups(group.__AreaId__).then(function(groups) {
+            groups.splice(_.indexOf(groups, group), 1);
+            groups.splice(index, 0, group);
+          });
+        }
       },
 
       // SUB AREAS
@@ -132,6 +170,14 @@ angular.module('navEditorApp')
         _getSubAreas(subArea.__AreaId__, subArea.__GroupId__).then(function(subAreas) {
           subAreas.splice(_.indexOf(subAreas, subArea.data), 1);
         });
+      },
+      reorderSubArea: function(index, subArea) {
+        if (_isItASubArea(subArea)) {
+          _getSubAreas(subArea.__AreaId__, subArea.__GroupId__).then(function(subAreas) {
+            subAreas.splice(_.indexOf(subAreas, subArea), 1);
+            subAreas.splice(index, 0, subArea);
+          });
+        }
       },
 
       save: function() {

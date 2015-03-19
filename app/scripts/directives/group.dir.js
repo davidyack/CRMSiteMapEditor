@@ -17,18 +17,16 @@ angular.module('navEditorApp')
       url: '^/group/:areaid'
     });
   })
-  .controller('GroupCtrl', function(AreaService, ModalService, $stateParams, $state) {
+  .controller('GroupCtrl', function(AreaService, ModalService, $stateParams, $state, _) {
     AreaService.getGroups($stateParams.areaid).then(function(groups) {
       this.groups = groups;
     }.bind(this));
     this.$stateParams = $stateParams;
 
     this.onDropComplete = function(index, obj, evt) {
-      var otherObj = this.groups[index];
-      var otherIndex = this.groups.indexOf(obj);
-      this.groups[index] = obj;
-      this.groups[otherIndex] = otherObj;
-      AreaService.updateGroups($stateParams.areaid, this.groups);
+      if (_.indexOf(this.groups, obj) !== -1) {
+        AreaService.reorderGroup(index, obj);
+      }
     };
 
     this.remove = function(group) {
