@@ -10,6 +10,27 @@
 angular.module('navEditorApp')
   .factory('AreaService', function($http, _) {
 
+    var _mixinArea = function(area) {
+      return angular.extend(area, {
+        __AreaId__: area.Id,
+      });
+    };
+
+    var _mixinGroup = function(group, area) {
+      return angular.extend(group, {
+        __AreaId__: area.Id,
+        __GroupId__: group.Id,
+      });
+    };
+
+    var _mixinSubArea = function(subArea, group) {
+      return angular.extend(subArea, {
+        __AreaId__: group.__AreaId__,
+        __GroupId__: group.Id,
+        __SubAreaId__: subArea.Id
+      });
+    };
+
     var _def = $http({
       method: 'GET',
       url: '/api/areas/',
@@ -19,18 +40,11 @@ angular.module('navEditorApp')
         ret.Indexes = {};
 
         ret.Areas = _.map(res.Areas, function(area) {
-          return angular.extend(area, {
-            __AreaId__: area.Id,
+          return angular.extend(_mixinArea(area), {
             Groups: _.map(area.Groups, function(group) {
-              return angular.extend(group, {
-                __AreaId__: area.Id,
-                __GroupId__: group.Id,
+              return angular.extend(_mixinGroup(group, area), {
                 SubAreas: _.map(group.SubAreas, function(subArea) {
-                  return angular.extend(subArea, {
-                    __SubAreaId__: subArea.Id,
-                    __AreaId__: area.Id,
-                    __GroupId__: group.Id
-                  });
+                  return _mixinSubArea(subArea, group);
                 })
               });
             })
@@ -64,7 +78,7 @@ angular.module('navEditorApp')
       },
       addArea: function(area) {
         return _def.then(function(response) {
-          response.data.Areas.push(area);
+          response.data.Areas.push(_mixinArea(area));
         });
       },
       updateArea: function(oldArea, newArea) {
@@ -82,9 +96,9 @@ angular.module('navEditorApp')
       getGroups: function(areaId) {
         return _getGroups(areaId);
       },
-      addGroup: function(areaId, group) {
-        _getGroups(areaId).then(function(groups) {
-          groups.push(group);
+      addGroup: function(area, group) {
+        _getGroups(area.Id).then(function(groups) {
+          groups.push(_mixinGroup(group, area));
         });
       },
       updateGroup: function(group, newGroup) {
@@ -104,9 +118,9 @@ angular.module('navEditorApp')
           return subAreas;
         });
       },
-      addSubArea: function(subArea) {
-        _getSubAreas(subArea).then(function(subAreas) {
-          subAreas.push(subArea);
+      addSubArea: function(group, subArea) {
+        _getSubAreas(group.__AreaId__, group.__GroupId__).then(function(subAreas) {
+          subAreas.push(_mixinSubArea(subArea, group));
         });
       },
       updateSubArea: function(subArea, newSubArea) {
@@ -119,7 +133,6 @@ angular.module('navEditorApp')
           subAreas.splice(_.indexOf(subAreas, subArea.data), 1);
         });
       },
-
 
       save: function() {
         _def.then(function(response) {

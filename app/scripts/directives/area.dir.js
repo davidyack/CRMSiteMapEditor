@@ -65,7 +65,7 @@ angular.module('navEditorApp')
 
     this.addGroup = function(area) {
       ModalService.group().then(function(newGroup) {
-        AreaService.addGroup(area.Id, newGroup);
+        AreaService.addGroup(area, newGroup);
       });
     };
 
