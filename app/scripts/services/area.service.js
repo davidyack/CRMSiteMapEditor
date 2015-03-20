@@ -31,30 +31,29 @@ angular.module('navEditorApp')
       });
     };
 
+    var _areas, _indexes = {};
     var _transformResponse = function(data, headersGetter, status) {
-        var ret = {};
         var res = JSON.parse(data);
-        ret.Indexes = {};
-        ret.Indexes.Areas = {};
-        ret.Indexes.Groups = {};
-        ret.Indexes.SubAreas = {};
+
+        _indexes.PKAreas = {};
+        _indexes.PKGroups = {};
+        _indexes.PKSubAreas = {};
 
         //TODO what to do if dublicate ID is received?
-        ret.Areas = _.map(res.Areas, function(area) {
-          return (ret.Indexes.Areas[area.Id] = angular.extend(_mixinArea(area), {
+        _areas = _.map(res.Areas, function(area) {
+          return (_indexes.PKAreas[area.Id] = angular.extend(_mixinArea(area), {
             Groups: _.map(area.Groups, function(group) {
-              return (ret.Indexes.Groups[group.Id] = angular.extend(_mixinGroup(group, area), {
+              return (_indexes.PKGroups[group.Id] = angular.extend(_mixinGroup(group, area), {
                 SubAreas: _.map(group.SubAreas, function(subArea) {
-                  return (ret.Indexes.SubAreas[subArea.Id] = _mixinSubArea(subArea, group));
+                  return (_indexes.PKSubAreas[subArea.Id] = _mixinSubArea(subArea, group));
                 })
               }));
             })
           }));
         });
-        return ret;
+        return _areas;
       };
 
-    var _areas, _indexes;
 
     var _def = $http({
       method: 'GET',
@@ -93,38 +92,40 @@ angular.module('navEditorApp')
 
     // Public API here
     return {
-      // for the sake of testing (
+      // for the sake of testing
       _transformResponse: _transformResponse,
+      _indexes: _indexes,
+      // for the sake of testing
+
       loadAreas: function() {
         return _def.then(function(response) {
-          _indexes = response.data.Indexes;
-          return (_areas = response.data.Areas);
+          return response.data.Areas;
         });
       },
       getAreas: function() {
         return _areas;
       },
       getArea: function(id) {
-        return _indexes.Areas[id];
+        return _indexes.PKAreas[id];
       },
       addArea: function(_area) {
         var area = _mixinArea(_area);
         _areas.push(area);
-        _indexes.Areas[area.Id] = area;
+        _indexes.PKAreas[area.Id] = area;
       },
       updateArea: function(area, newArea) {
         _areas[_.indexOf(_areas, area)] = newArea;
-        delete _indexes.Areas[area.Id];
-        _indexes.Areas[newArea.Id] = newArea;
+        delete _indexes.PKAreas[area.Id];
+        _indexes.PKAreas[newArea.Id] = newArea;
       },
       removeArea: function(area) {
         _areas.splice(_.indexOf(_areas, area), 1);
-        delete _indexes.Areas[area.Id];
-        _.each(_.where(_.values(_indexes.Groups), {__AreaId__: area.Id}), function(group) {
-          _.each(_.where(_.values(_indexes.SubAreas), {__AreaId__: area.Id, __GroupId__: group.Id}), function(subArea) {
-            delete _indexes.SubAreas[subArea.Id];
+        delete _indexes.PKAreas[area.Id];
+        _.each(_.where(_.values(_indexes.PKGroups), {__AreaId__: area.Id}), function(group) {
+          _.each(_.where(_.values(_indexes.PKSubAreas), {__AreaId__: area.Id, __GroupId__: group.Id}), function(subArea) {
+            delete _indexes.PKSubAreas[subArea.Id];
           });
-          delete _indexes.Groups[group.Id];
+          delete _indexes.PKGroups[group.Id];
         });
       },
       reorderArea: function(index, area) {
@@ -139,25 +140,25 @@ angular.module('navEditorApp')
         return _getGroups(areaId);
       },
       getGroup: function(id) {
-        return _indexes.Groups[id];
+        return _indexes.PKGroups[id];
       },
       addGroup: function(area, _group) {
         var group = _mixinGroup(_group, area);
         _getGroups(area.Id).push(group);
-        _indexes.Groups[group.Id] = group;
+        _indexes.PKGroups[group.Id] = group;
       },
       updateGroup: function(group, newGroup) {
         var groups = _getGroups(group.__AreaId__);
         groups[_.indexOf(groups, group)] = newGroup;
-        delete _indexes.Groups[group.Id];
-        _indexes.Groups[newGroup.Id] = newGroup;
+        delete _indexes.PKGroups[group.Id];
+        _indexes.PKGroups[newGroup.Id] = newGroup;
       },
       removeGroup: function(group) {
         var groups = _getGroups(group.__AreaId__);
         groups.splice(_.indexOf(groups, group), 1);
-        delete _indexes.Groups[group.Id];
-        _.each(_.where(_.values(_indexes.SubAreas), {__AreaId__: group.__AreaId__, __GroupId__: group.Id}), function(subArea) {
-          delete _indexes.SubAreas[subArea.Id];
+        delete _indexes.PKGroups[group.Id];
+        _.each(_.where(_.values(_indexes.PKSubAreas), {__AreaId__: group.__AreaId__, __GroupId__: group.Id}), function(subArea) {
+          delete _indexes.PKSubAreas[subArea.Id];
         });
       },
       reorderGroup: function(index, group) {
@@ -176,18 +177,18 @@ angular.module('navEditorApp')
         var subArea = _mixinSubArea(_subArea, group);
         var subAreas = _getSubAreas(group.__AreaId__, group.__GroupId__);
         subAreas.push(subArea);
-        _indexes.SubAreas[subArea.Id] = subArea;
+        _indexes.PKSubAreas[subArea.Id] = subArea;
       },
       updateSubArea: function(subArea, newSubArea) {
         var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
         subAreas[_.indexOf(subAreas, subArea)] = newSubArea;
-        delete _indexes.SubAreas[subArea.Id];
-        _indexes.SubAreas[newSubArea.Id] = newSubArea;
+        delete _indexes.PKSubAreas[subArea.Id];
+        _indexes.PKSubAreas[newSubArea.Id] = newSubArea;
       },
       removeSubArea: function(subArea) {
         var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
         subAreas.splice(_.indexOf(subAreas, subArea.data), 1);
-        delete _indexes.SubAreas[subArea.Id];
+        delete _indexes.PKSubAreas[subArea.Id];
       },
       reorderSubArea: function(index, subArea) {
         if (_isItASubArea(subArea)) {

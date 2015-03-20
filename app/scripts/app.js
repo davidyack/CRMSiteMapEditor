@@ -11,6 +11,9 @@
 angular.module('underscore', [])
   .factory('_', function() {
     return window._;
+  })
+  .factory('Underscore', function() {
+    return window._;
   });
 
 angular
