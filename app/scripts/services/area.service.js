@@ -31,48 +31,46 @@ angular.module('navEditorApp')
       });
     };
 
-    var _def = $http({
-      method: 'GET',
-      url: '/api/areas/',
-      transformResponse: function(data, headersGetter, status) {
+    var _transformResponse = function(data, headersGetter, status) {
         var ret = {};
         var res = JSON.parse(data);
         ret.Indexes = {};
+        ret.Indexes.Areas = {};
+        ret.Indexes.Groups = {};
+        ret.Indexes.SubAreas = {};
 
+        //TODO what to do if dublicate ID is received?
         ret.Areas = _.map(res.Areas, function(area) {
-          return angular.extend(_mixinArea(area), {
+          return (ret.Indexes.Areas[area.Id] = angular.extend(_mixinArea(area), {
             Groups: _.map(area.Groups, function(group) {
-              return angular.extend(_mixinGroup(group, area), {
+              return (ret.Indexes.Groups[group.Id] = angular.extend(_mixinGroup(group, area), {
                 SubAreas: _.map(group.SubAreas, function(subArea) {
-                  return _mixinSubArea(subArea, group);
+                  return (ret.Indexes.SubAreas[subArea.Id] = _mixinSubArea(subArea, group));
                 })
-              });
+              }));
             })
-          });
+          }));
         });
         return ret;
-      }
+      };
+
+    var _areas, _indexes;
+
+    var _def = $http({
+      method: 'GET',
+      url: '/api/areas/',
+      transformResponse: _transformResponse
     });
 
 
-    var _getAreas = function() {
-      return _def.then(function(response) {
-        return response.data.Areas;
-      });
-    };
-
     var _getGroups = function(areaId) {
-      return _def.then(function(response) {
-        var area = _.findWhere(response.data.Areas, {__AreaId__: areaId});
-        return area.Groups || (area.Groups = []);
-      });
+      var area = _.findWhere(_areas, {__AreaId__: areaId});
+      return area.Groups || (area.Groups = []);
     };
 
     var _getSubAreas = function(areaId, groupId) {
-      return _getGroups(areaId).then(function(groups) {
-        var group = _.findWhere(groups, {__GroupId__: groupId});
-        return group.SubAreas || (group.SubAreas = []);
-      });
+      var group = _.findWhere(_getGroups(areaId), {__GroupId__: groupId});
+      return group.SubAreas || (group.SubAreas = []);
     };
 
     var _isItAnArea = function(entity) {
@@ -95,30 +93,44 @@ angular.module('navEditorApp')
 
     // Public API here
     return {
+      // for the sake of testing (
+      _transformResponse: _transformResponse,
+      loadAreas: function() {
+        return _def.then(function(response) {
+          _indexes = response.data.Indexes;
+          return (_areas = response.data.Areas);
+        });
+      },
       getAreas: function() {
-        return _getAreas();
+        return _areas;
       },
-      addArea: function(area) {
-        _getAreas().then(function(areas) {
-          areas.push(_mixinArea(area));
-        });
+      getArea: function(id) {
+        return _indexes.Areas[id];
       },
-      updateArea: function(oldArea, newArea) {
-        _getAreas().then(function(areas) {
-          areas[_.indexOf(areas, oldArea)] = newArea;
-        });
+      addArea: function(_area) {
+        var area = _mixinArea(_area);
+        _areas.push(area);
+        _indexes.Areas[area.Id] = area;
+      },
+      updateArea: function(area, newArea) {
+        _areas[_.indexOf(_areas, area)] = newArea;
+        delete _indexes.Areas[area.Id];
+        _indexes.Areas[newArea.Id] = newArea;
       },
       removeArea: function(area) {
-        _getAreas().then(function(areas) {
-          areas.splice(_.indexOf(areas, area), 1);
+        _areas.splice(_.indexOf(_areas, area), 1);
+        delete _indexes.Areas[area.Id];
+        _.each(_.where(_.values(_indexes.Groups), {__AreaId__: area.Id}), function(group) {
+          _.each(_.where(_.values(_indexes.SubAreas), {__AreaId__: area.Id, __GroupId__: group.Id}), function(subArea) {
+            delete _indexes.SubAreas[subArea.Id];
+          });
+          delete _indexes.Groups[group.Id];
         });
       },
       reorderArea: function(index, area) {
         if (_isItAnArea(area)) {
-          _getAreas().then(function(areas) {
-            areas.splice(_.indexOf(areas, area), 1);
-            areas.splice(index, 0, area);
-          });
+          _areas.splice(_.indexOf(_areas, area), 1);
+          _areas.splice(index, 0, area);
         }
       },
 
@@ -126,57 +138,62 @@ angular.module('navEditorApp')
       getGroups: function(areaId) {
         return _getGroups(areaId);
       },
-      addGroup: function(area, group) {
-        _getGroups(area.Id).then(function(groups) {
-          groups.push(_mixinGroup(group, area));
-        });
+      getGroup: function(id) {
+        return _indexes.Groups[id];
+      },
+      addGroup: function(area, _group) {
+        var group = _mixinGroup(_group, area);
+        _getGroups(area.Id).push(group);
+        _indexes.Groups[group.Id] = group;
       },
       updateGroup: function(group, newGroup) {
-        _getGroups(group.__AreaId__).then(function(groups) {
-          groups[_.indexOf(groups, group)] = newGroup;
-        });
+        var groups = _getGroups(group.__AreaId__);
+        groups[_.indexOf(groups, group)] = newGroup;
+        delete _indexes.Groups[group.Id];
+        _indexes.Groups[newGroup.Id] = newGroup;
       },
       removeGroup: function(group) {
-        _getGroups(group.__AreaId__).then(function(groups) {
-          groups.splice(_.indexOf(groups, group), 1);
+        var groups = _getGroups(group.__AreaId__);
+        groups.splice(_.indexOf(groups, group), 1);
+        delete _indexes.Groups[group.Id];
+        _.each(_.where(_.values(_indexes.SubAreas), {__AreaId__: group.__AreaId__, __GroupId__: group.Id}), function(subArea) {
+          delete _indexes.SubAreas[subArea.Id];
         });
       },
       reorderGroup: function(index, group) {
         if (_isItAGroup(group)) {
-          _getGroups(group.__AreaId__).then(function(groups) {
-            groups.splice(_.indexOf(groups, group), 1);
-            groups.splice(index, 0, group);
-          });
+          var groups = _getGroups(group.__AreaId__);
+          groups.splice(_.indexOf(groups, group), 1);
+          groups.splice(index, 0, group);
         }
       },
 
       // SUB AREAS
       getSubAreas: function(areaId, groupId) {
-        return _getSubAreas(areaId, groupId).then(function(subAreas) {
-          return subAreas;
-        });
+        return _getSubAreas(areaId, groupId);
       },
-      addSubArea: function(group, subArea) {
-        _getSubAreas(group.__AreaId__, group.__GroupId__).then(function(subAreas) {
-          subAreas.push(_mixinSubArea(subArea, group));
-        });
+      addSubArea: function(group, _subArea) {
+        var subArea = _mixinSubArea(_subArea, group);
+        var subAreas = _getSubAreas(group.__AreaId__, group.__GroupId__);
+        subAreas.push(subArea);
+        _indexes.SubAreas[subArea.Id] = subArea;
       },
       updateSubArea: function(subArea, newSubArea) {
-        _getSubAreas(subArea.__AreaId__, subArea.__GroupId__).then(function(subAreas) {
-          subAreas[_.indexOf(subAreas, subArea)] = newSubArea;
-        });
+        var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
+        subAreas[_.indexOf(subAreas, subArea)] = newSubArea;
+        delete _indexes.SubAreas[subArea.Id];
+        _indexes.SubAreas[newSubArea.Id] = newSubArea;
       },
       removeSubArea: function(subArea) {
-        _getSubAreas(subArea.__AreaId__, subArea.__GroupId__).then(function(subAreas) {
-          subAreas.splice(_.indexOf(subAreas, subArea.data), 1);
-        });
+        var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
+        subAreas.splice(_.indexOf(subAreas, subArea.data), 1);
+        delete _indexes.SubAreas[subArea.Id];
       },
       reorderSubArea: function(index, subArea) {
         if (_isItASubArea(subArea)) {
-          _getSubAreas(subArea.__AreaId__, subArea.__GroupId__).then(function(subAreas) {
-            subAreas.splice(_.indexOf(subAreas, subArea), 1);
-            subAreas.splice(index, 0, subArea);
-          });
+          var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
+          subAreas.splice(_.indexOf(subAreas, subArea), 1);
+          subAreas.splice(index, 0, subArea);
         }
       },
 

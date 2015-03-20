@@ -16,7 +16,13 @@ angular.module('navEditorApp')
           templateUrl: 'views/main.view.html',
         }
       },
-      url: ''
+      url: '',
+      resolve: {
+        areaService: 'AreaService',
+        areas: function(areaService) {
+          return areaService.loadAreas();
+        }
+      }
     });
   })
   .directive('areas', function () {
@@ -25,18 +31,11 @@ angular.module('navEditorApp')
       replace: true,
       templateUrl: 'views/area.view.html',
       controller: 'AreaCtrl',
-      controllerAs: 'areaCtrl',
-      link: function(scope, elem, attr, ctrl) {
-         elem.bind('dragstart', function(e) {
-            //do something here.
-         });
-      }
+      controllerAs: 'areaCtrl'
     };
   })
   .controller('AreaCtrl', function(AreaService, ModalService, $stateParams, $state, _) {
-    AreaService.getAreas().then(function(areas) {
-      this.areas = areas;
-    }.bind(this));
+    this.areas = AreaService.getAreas();
     this.$stateParams = $stateParams;
 
     this.onDropComplete = function(index, obj, evt) {

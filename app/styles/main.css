@@ -15,15 +15,14 @@ a:hover {
   box-sizing: border-box;
 }
 .entities__frame {
-  padding: 15px;
+  padding: 20px 40px;
 }
 .entity {
   position: relative;
 }
 
 .area-entity {
-  height: 100px;
-  line-height: 160px;
+  height: 80px;
   background-color: #5865bf;
   border: 1px solid #3c4ab2;
 }
@@ -33,7 +32,8 @@ a:hover {
 }
 
 .subarea-entity {
-  text-align: center;
+  padding-left: 15px;
+  text-align: left;
   height: 50px;
   line-height: 50px;
   background-color: white;
@@ -65,7 +65,8 @@ a:hover {
 }
 
 .area-entity .entity-link {
-  padding-left: 10px;
+  padding-left: 15px;
+  padding-top: 45px;
   font-size: larger;
 }
 

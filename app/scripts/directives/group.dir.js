@@ -18,9 +18,7 @@ angular.module('navEditorApp')
     });
   })
   .controller('GroupCtrl', function(AreaService, ModalService, $stateParams, $state, _) {
-    AreaService.getGroups($stateParams.areaid).then(function(groups) {
-      this.groups = groups;
-    }.bind(this));
+    this.groups = AreaService.getGroups($stateParams.areaid);
     this.$stateParams = $stateParams;
 
     this.onDropComplete = function(index, obj, evt) {
