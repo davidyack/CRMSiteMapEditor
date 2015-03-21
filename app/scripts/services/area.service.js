@@ -33,26 +33,48 @@ angular.module('navEditorApp')
 
     var _areas, _indexes = {};
     var _transformResponse = function(data, headersGetter, status) {
-        var res = JSON.parse(data);
+      var res = JSON.parse(data);
 
-        _indexes.PKAreas = {};
-        _indexes.PKGroups = {};
-        _indexes.PKSubAreas = {};
+      _indexes.PKAreas = {};
+      _indexes.PKGroups = {};
+      _indexes.PKSubAreas = {};
 
-        //TODO what to do if dublicate ID is received?
-        _areas = _.map(res.Areas, function(area) {
-          return (_indexes.PKAreas[area.Id] = angular.extend(_mixinArea(area), {
-            Groups: _.map(area.Groups, function(group) {
-              return (_indexes.PKGroups[group.Id] = angular.extend(_mixinGroup(group, area), {
-                SubAreas: _.map(group.SubAreas, function(subArea) {
-                  return (_indexes.PKSubAreas[subArea.Id] = _mixinSubArea(subArea, group));
-                })
-              }));
-            })
-          }));
-        });
-        return _areas;
-      };
+      //TODO what to do if dublicate ID is received?
+      return (_areas = _.map(res.Areas, function(area) {
+        return (_indexes.PKAreas[area.Id] = angular.extend(_mixinArea(area), {
+          Groups: _.map(area.Groups, function(group) {
+            return (_indexes.PKGroups[group.Id] = angular.extend(_mixinGroup(group, area), {
+              SubAreas: _.map(group.SubAreas, function(subArea) {
+                return (_indexes.PKSubAreas[subArea.Id] = _mixinSubArea(subArea, group));
+              })
+            }));
+          })
+        }));
+      }));
+    };
+
+    var _transformRequest = function(data, headersGetter, status) {
+      var exclude = ['__AreaId__', '__GroupId__', '__SubAreaId__'];
+      return JSON.stringify({
+        Areas: _.map(_areas, function(area) {
+          if (area.Groups.length === 0) {
+            delete area.Groups;
+          } else {
+            area.Groups = _.map(area.Groups, function(group) {
+              if (group.SubAreas.length === 0) {
+                delete group.SubAreas;
+              } else {
+                group.SubAreas = _.map(group.SubAreas, function(subArea) {
+                  return _.omit(subArea, exclude);
+                });
+              }
+              return _.omit(group, exclude);
+            });
+          }
+          return _.omit(area, exclude);
+        })
+      });
+    };
 
 
     var _def = $http({
@@ -94,6 +116,7 @@ angular.module('navEditorApp')
     return {
       // for the sake of testing
       _transformResponse: _transformResponse,
+      _transformRequest: _transformRequest,
       _indexes: _indexes,
       // for the sake of testing
 
@@ -199,8 +222,11 @@ angular.module('navEditorApp')
       },
 
       save: function() {
-        _def.then(function(response) {
-          $http.post('/api/areas', response.data);
+        console.log(_transformRequest());
+        $http({
+          method: 'POST',
+          url: '/api/areas/',
+          transformRequest: _transformRequest
         });
       }
     };

@@ -21,7 +21,12 @@ angular.module('navEditorApp')
         areaService: 'AreaService',
         areas: function(areaService) {
           return areaService.loadAreas();
+        },
+        entityService: 'EntityService',
+        entities: function(entityService) {
+          return entityService.loadEnities();
         }
+
       }
     });
   })

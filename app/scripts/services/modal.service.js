@@ -8,7 +8,7 @@
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('ModalService', function($modal) {
+  .factory('ModalService', function($modal, EntityService) {
 
     var openRemoveModal = function(entityType, entity) {
       return $modal.open({
@@ -40,11 +40,26 @@ angular.module('navEditorApp')
     var subAreaModal = function(oldEntity) {
       return $modal.open({
         templateUrl: '/views/subarea.modal.html',
-        controller: 'ModalUpdateCtrl',
+        controller: function($scope, $modalInstance, oldEntity, entities) {
+            $scope.oldEntity = oldEntity;
+            $scope.entities = entities;
+            $scope.newEntity = angular.extend({}, oldEntity);
+
+            $scope.ok = function(isValid) {
+                if (isValid) {
+                    $modalInstance.close($scope.newEntity);
+                }
+            };
+
+            $scope.cancel = function() {
+                $modalInstance.dismiss('cancel');
+            };
+        },
         resolve: {
           oldEntity: function() {
             return oldEntity;
-          }
+          },
+          entities: EntityService.getEntities
         }
       });
     };

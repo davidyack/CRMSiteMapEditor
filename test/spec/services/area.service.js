@@ -49,6 +49,10 @@ describe('Service: areas', function () {
     _indexes = AreaService._indexes;
   }));
 
+  it('transformations should be muttually exclusive', function() {
+    expect(JSON.parse(AreaService._transformRequest())).toEqual(json);
+  });
+
   it('getArea should return area by Id', function () {
     var areas = AreaService.getAreas();
     expect(AreaService.getArea('Area1').Id).toBe(areas[0].Id);

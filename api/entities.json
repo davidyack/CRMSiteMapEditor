@@ -1,0 +1,9 @@
+{
+  "Enities": [
+    {
+      "DisplayName": "Account"
+    },{
+      "DisplayName": "Activity"
+    }
+  ]
+}

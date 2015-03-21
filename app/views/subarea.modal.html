@@ -30,8 +30,11 @@
     </div>
     <div class="form-group">
       <label for="entityEntity">Entity</label>
-      <input ng-model='newEntity.Entity' name="entityEntity" type="text" class="form-control" id="entityEntity" placeholder="Enter entity">
-    </div>
+      <select name="entityEntity" class="form-control"
+        ng-model="newEntity.Entity"
+        ng-options="entity.DisplayName for entity in entities" >
+      </select>
+     </div>
     <label class="checkbox-inline">
       <input type="checkbox" ng-model="newEntity.AvailableOffline">Available Offline</input>
     </label>
