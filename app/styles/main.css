@@ -129,7 +129,7 @@ a:hover {
 
 
 .szn-autocomplete-results {
-  height: 200px;
+  max-height: 200px;
   width: 90%;
   background-color: #fff;
   overflow: scroll;
