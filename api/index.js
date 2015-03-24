@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 
 require('./areas')(app);
 require('./entities')(app);
-
+require('./icons')(app);
+require('./urls')(app);
 
 module.exports = app;

@@ -8,20 +8,20 @@
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('EntityService', function ($http) {
+  .factory('UrlService', function ($http) {
 
-    var entities;
+    var urls;
     return {
-      loadEntities: function () {
+      loadUrls: function () {
         $http({
           method: 'GET',
-          url: '/api/entities'
+          url: '/api/urls'
         }).then(function(response) {
-          return (entities = response.data.Enities);
+          return (urls = response.data.Urls);
         });
       },
-      getEntities: function() {
-        return entities;
+      getUrls: function() {
+        return urls;
       }
     };
   });

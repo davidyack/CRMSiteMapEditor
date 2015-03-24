@@ -125,3 +125,33 @@ a:hover {
 [ng-drop].drag-enter {
   /*border: 1px solid gray;*/
 }
+
+
+
+.szn-autocomplete-results {
+  height: 200px;
+  width: 90%;
+  background-color: #fff;
+  overflow: scroll;
+  position: absolute;
+  z-index: 9999;
+  padding: 5px 0;
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 4px;
+  list-style-type: none;
+}
+
+.szn-autocomplete-results li {
+  padding: 0 5px;
+  line-height: 1.4;
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.szn-autocomplete-results li.selected {
+  background: Highlight;
+  color: HighlightText;
+}

@@ -24,9 +24,16 @@ angular.module('navEditorApp')
         },
         entityService: 'EntityService',
         entities: function(entityService) {
-          return entityService.loadEnities();
+          return entityService.loadEntities();
+        },
+        iconService: 'IconService',
+        icons: function(iconService) {
+          return iconService.loadIcons();
+        },
+        urlService: 'UrlService',
+        urls: function(urlService) {
+          return urlService.loadUrls();
         }
-
       }
     });
   })

@@ -1,0 +1,12 @@
+{
+  "Icons": [
+    {
+      "DisplayName": "likeIcon.png",
+      "Name": "msdyn_/Images/likeIcon.png"
+
+    },{
+      "DisplayName": "jqueryUIIcons",
+      "Name": "msdyn_/Images/jqueryUIIcons.png"
+    }
+  ]
+}

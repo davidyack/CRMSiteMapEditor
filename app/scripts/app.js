@@ -17,6 +17,6 @@ angular.module('underscore', [])
   });
 
 angular
-  .module('navEditorApp', ['underscore', 'ui.router', 'ui.bootstrap', 'ngDraggable']);
+  .module('navEditorApp', ['underscore', 'ui.router', 'ui.bootstrap', 'ngDraggable', 'angular-szn-autocomplete']);
 
 

@@ -1,0 +1,7 @@
+<ul ng-show="show" class="szn-autocomplete-results">
+    <li szn-autocomplete-result ng-repeat="result in results" ng-class="{selected: highlightIndex == $index}">
+        <div><span view-as-html="result.value | sznAutocompleteBoldMatch:query"></span>
+        </div>
+        <p view-as-html="result.name"></p>
+    </li>
+</ul>

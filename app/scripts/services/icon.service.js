@@ -8,20 +8,20 @@
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('EntityService', function ($http) {
+  .factory('IconService', function ($http) {
 
-    var entities;
+    var icons;
     return {
-      loadEntities: function () {
+      loadIcons: function () {
         $http({
           method: 'GET',
-          url: '/api/entities'
+          url: '/api/icons'
         }).then(function(response) {
-          return (entities = response.data.Enities);
+          return (icons = response.data.Icons);
         });
       },
-      getEntities: function() {
-        return entities;
+      getIcons: function() {
+        return icons;
       }
     };
   });
