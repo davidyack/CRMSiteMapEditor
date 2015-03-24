@@ -30,12 +30,11 @@
     </div>
     <div class="form-group">
       <label for="entityIcon">Icon</label>
-      <input ng-model='newEntity.Icon' name="entityIcon" type="text" class="form-control" id="entityIcon" placeholder="Enter Icon">
+      <input class="form-control" ng-model="newEntity.Icon" szn-autocomplete="iconOptions" placeholder="Search icon"/>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.entityUrl.$error.url}">
       <label for="entityUrl">Url</label>
-      <input type = "url" ng-model='newEntity.Url' name="entityUrl" type="text" class="form-control" id="entityUrl" placeholder="Enter Url">
-      <p class="help-block" ng-if="submitted && form.entityUrl.$error.url">Please specify a valid URL</p>
+      <input class="form-control" ng-model="newEntity.Url" szn-autocomplete="urlOptions" placeholder="Search url"/>
     </div>
   </div>
   <div class="modal-footer">
