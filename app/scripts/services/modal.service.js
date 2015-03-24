@@ -28,11 +28,13 @@ angular.module('navEditorApp')
     var areaModal = function(oldEntity) {
       return $modal.open({
         templateUrl: '/views/area.modal.html',
-        controller: 'ModalUpdateCtrl',
+        controller: 'ModalUpdateCtrl2',
         resolve: {
           oldEntity: function() {
             return oldEntity;
-          }
+          },
+          urls: UrlService.getUrls,
+          icons: IconService.getIcons,
         }
       });
     };
@@ -40,69 +42,14 @@ angular.module('navEditorApp')
     var subAreaModal = function(oldEntity) {
       return $modal.open({
         templateUrl: '/views/subarea.modal.html',
-        controller: function($scope, $modalInstance, oldEntity, entities, urls, icons) {
-            $scope.oldEntity = oldEntity;
-            $scope.entities = entities;
-            $scope.newEntity = angular.extend({}, oldEntity);
-            $scope.urlSearch = function(query, deferred) {
-                var results = _.map(_.filter(urls, function(item) {
-                  return (item.DisplayName.indexOf(query) !== -1);
-                }), function(item) {
-                  return {
-                    value: item.DisplayName,
-                    name: item.Name
-                  };
-                });
-                deferred.resolve({results: results});
-            };
-            $scope.urlOptions = {
-                searchMethod: 'urlSearch',
-                templateUrl: '/views/autocomplete.view.html',
-                onSelect: function(item) {
-                  $scope.newEntity.Url = {
-                    DisplayName: item.value,
-                    Name: item.name
-                  };
-                }
-            };
-            $scope.iconSearch = function(query, deferred) {
-                var results = _.map(_.filter(icons, function(item) {
-                  return (item.DisplayName.indexOf(query) !== -1);
-                }), function(item) {
-                  return {
-                    value: item.DisplayName,
-                    name: item.Name
-                  };
-                });
-                deferred.resolve({results: results});
-            };
-            $scope.iconOptions = {
-                searchMethod: 'iconSearch',
-                templateUrl: '/views/autocomplete.view.html',
-                onSelect: function(item) {
-                  $scope.newEntity.Icon = {
-                    DisplayName: item.value,
-                    Name: item.name
-                  };
-                }
-            };
-            $scope.ok = function(isValid) {
-                if (isValid) {
-                    $modalInstance.close($scope.newEntity);
-                }
-            };
-
-            $scope.cancel = function() {
-                $modalInstance.dismiss('cancel');
-            };
-        },
+        controller: 'ModalUpdateCtrl3',
         resolve: {
           oldEntity: function() {
             return oldEntity;
           },
-          entities: EntityService.getEntities,
           urls: UrlService.getUrls,
-          icons: IconService.getIcons
+          icons: IconService.getIcons,
+          entities: EntityService.getEntities
         }
       });
     };
@@ -110,11 +57,12 @@ angular.module('navEditorApp')
     var groupModal = function(oldEntity) {
       return $modal.open({
         templateUrl: '/views/group.modal.html',
-        controller: 'ModalUpdateCtrl',
+        controller: 'ModalUpdateCtrl1',
         resolve: {
           oldEntity: function() {
             return oldEntity;
-          }
+          },
+          urls: UrlService.getUrls
         }
       });
     };
