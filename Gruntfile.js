@@ -149,7 +149,7 @@ module.exports = function (grunt) {
       }
     },
     concat: {
-      '.tmp/main.js': ['.tmp/vendor.js',
+      '.tmp/crmsitemapeditor.js': ['.tmp/vendor.js',
             '.tmp/app.js']
     },
     // Empties folders to start fresh
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
       },
       all: {
           src: ['<%= yeoman.app %>/styles/app.css', 'node_modules/bootstrap/dist/css/bootstrap.css'],
-          dest: '.tmp/main.css'
+          dest: '.tmp/crmsitemapeditor.css'
       },
     },
 
@@ -203,7 +203,7 @@ module.exports = function (grunt) {
     copy: {
       dist: {
         files: [
-          {expand: true, cwd: '.tmp', src: ['main.css', 'main.js'], dest: '<%= yeoman.dist %>/'},
+          {expand: true, cwd: '.tmp', src: ['crmsitemapeditor.css', 'crmsitemapeditor.js'], dest: '<%= yeoman.dist %>/'},
           {expand: true, cwd: '<%= yeoman.app %>', src: ['images/*'], dest: '<%= yeoman.dist %>/'}
         ],
       },

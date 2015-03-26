@@ -1,0 +1,27 @@
+{
+  "name": "CRMSiteMapEditor",
+  "version": "1.0.0",
+  "homepage": "https://github.com/davidyack/CRMSiteMapEditor",
+  "authors": [
+    "David Yack <dyack@coloradotc.com>"
+  ],
+  "description": "CRM Site Map Editor is a work in progress HTML Dynamics CRM Site Map Editor",
+  "main": "[\"dist/crmsitemapeditor.js\",\"dist/crmsitemapeditor.css\"]",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "[\"crm\"",
+    "\"xrm\"",
+    "\"dynamics",
+    "crm\"]"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
