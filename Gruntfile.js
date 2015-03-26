@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
-  var externals = ['bootstrap', 'jquery', 'angular', 'underscore','angular-bootstrap',
+  var externals = ['angular', 'bootstrap', 'jquery', 'underscore','angular-bootstrap',
     'angular-szn-autocomplete', 'angular-ui-router', 'ngDraggable'];
 
   // Define the configuration for all the tasks
@@ -141,7 +141,7 @@ module.exports = function (grunt) {
         }
       },
       app: {
-        src: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        src: ['<%= yeoman.app %>/scripts/{,*/}*.js', '.tmp/templates.js'],
         dest: '.tmp/app.js',
         options: {
           external: externals,
@@ -150,7 +150,7 @@ module.exports = function (grunt) {
     },
     concat: {
       '.tmp/main.js': ['.tmp/vendor.js',
-            '.tmp/templates.js', '.tmp/app.js']
+            '.tmp/app.js']
     },
     // Empties folders to start fresh
     clean: {
@@ -220,8 +220,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'concurrent:test',
-    'autoprefixer',
+    'html2js',
+    'browserify',
+    'concat',
     'connect:test',
     'karma'
   ]);
