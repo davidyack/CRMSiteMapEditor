@@ -1,5 +1,13 @@
 'use strict';
 
+require('angular');
+
+require('./icon.service');
+require('./modal.service');
+require('./url.service');
+require('./entity.service');
+
+
 /**
  * @ngdoc service
  * @name navEditorApp.modal.service
@@ -12,7 +20,7 @@ angular.module('navEditorApp')
 
     var openRemoveModal = function(entityType, entity) {
       return $modal.open({
-        templateUrl: '/views/modalremove.view.html',
+        templateUrl: 'views/modalremove.view.html',
         controller: 'ModalRemoveCtrl',
         resolve: {
           entityType: function() {
@@ -27,7 +35,7 @@ angular.module('navEditorApp')
 
     var areaModal = function(oldEntity) {
       return $modal.open({
-        templateUrl: '/views/area.modal.html',
+        templateUrl: 'views/area.modal.html',
         controller: 'ModalUpdateCtrl2',
         resolve: {
           oldEntity: function() {
@@ -41,7 +49,7 @@ angular.module('navEditorApp')
 
     var subAreaModal = function(oldEntity) {
       return $modal.open({
-        templateUrl: '/views/subarea.modal.html',
+        templateUrl: 'views/subarea.modal.html',
         controller: 'ModalUpdateCtrl3',
         resolve: {
           oldEntity: function() {
@@ -56,7 +64,7 @@ angular.module('navEditorApp')
 
     var groupModal = function(oldEntity) {
       return $modal.open({
-        templateUrl: '/views/group.modal.html',
+        templateUrl: 'views/group.modal.html',
         controller: 'ModalUpdateCtrl1',
         resolve: {
           oldEntity: function() {

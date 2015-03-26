@@ -2,7 +2,6 @@
 
 ```sh
 $ npm install
-$ bower install
 ```
 
 ## Build & development

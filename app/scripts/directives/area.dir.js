@@ -1,5 +1,9 @@
 'use strict';
 
+require('angular');
+require('angular-ui-router');
+
+
 /**
  * @ngdoc directive
  * @name navEditorApp.directive:areas
@@ -16,7 +20,7 @@ angular.module('navEditorApp')
           templateUrl: 'views/main.view.html',
         }
       },
-      url: '',
+      url: '/',
       resolve: {
         areaService: 'AreaService',
         areas: function(areaService) {

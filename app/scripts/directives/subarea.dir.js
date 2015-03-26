@@ -1,5 +1,8 @@
 'use strict';
 
+require('angular');
+require('angular-ui-router');
+
 /**
  * @ngdoc directive
  * @name navEditorApp.directive:group

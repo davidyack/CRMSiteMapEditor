@@ -1,5 +1,6 @@
 'use strict';
 
+require('angular');
 /**
  * @ngdoc service
  * @name navEditorApp.areas
