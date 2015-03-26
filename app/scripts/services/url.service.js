@@ -1,5 +1,7 @@
 'use strict';
 
+require('angular');
+
 /**
  * @ngdoc service
  * @name navEditorApp.entity.service
@@ -15,7 +17,7 @@ angular.module('navEditorApp')
       loadUrls: function () {
         $http({
           method: 'GET',
-          url: '/api/urls'
+          url: 'api/urls'
         }).then(function(response) {
           return (urls = response.data.Urls);
         });

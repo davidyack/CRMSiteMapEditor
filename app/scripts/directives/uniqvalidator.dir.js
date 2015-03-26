@@ -1,5 +1,7 @@
 'use strict';
 
+require('angular');
+
 angular.module('navEditorApp')
   .directive('uniqid', function(AreaService, _) {
     return {

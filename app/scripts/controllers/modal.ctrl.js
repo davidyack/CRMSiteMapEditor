@@ -1,5 +1,7 @@
 'use strict';
 
+require('angular');
+
 /**
  * @ngdoc function
  * @name navEditorApp.controller:MainCtrl
@@ -24,7 +26,7 @@ angular.module('navEditorApp')
     };
     $scope.urlOptions = {
         searchMethod: 'urlSearch',
-        templateUrl: '/views/autocomplete.view.html',
+        templateUrl: 'views/autocomplete.view.html',
         onSelect: function(item) {
           $scope.newEntity.Url = item.name;
         }
@@ -54,7 +56,7 @@ angular.module('navEditorApp')
     };
     $scope.iconOptions = {
         searchMethod: 'iconSearch',
-        templateUrl: '/views/autocomplete.view.html',
+        templateUrl: 'views/autocomplete.view.html',
         onSelect: function(item) {
           $scope.newEntity.Icon = item.name;
         }

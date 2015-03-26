@@ -1,5 +1,8 @@
 'use strict';
 
+require('angular');
+require('angular-ui-router');
+
 /**
  * @ngdoc directive
  * @name navEditorApp.directive:group
@@ -17,7 +20,7 @@ angular.module('navEditorApp')
       url: '^/group/:areaid'
     });
   })
-  .controller('GroupCtrl', function(AreaService, ModalService, $stateParams, $state, _) {
+  .controller('GroupCtrl', function(AreaService, ModalService, $stateParams, $state, _, $templateCache) {
     this.groups = AreaService.getGroups($stateParams.areaid);
     this.$stateParams = $stateParams;
 

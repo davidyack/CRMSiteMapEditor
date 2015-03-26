@@ -1,5 +1,7 @@
 'use strict';
 
+require('angular');
+
 /**
  * @ngdoc directive
  * @name navEditorApp.directive:add
@@ -16,9 +18,7 @@ angular.module('navEditorApp')
       controllerAs: 'actionsCtrl'
     };
   })
-  .controller('ActionsCtrl', function($stateParams, $modal, AreaService, ModalService) {
-    this.$stateParams = $stateParams;
-
+  .controller('ActionsCtrl', function(AreaService, ModalService) {
     this.save = function() {
       AreaService.save();
     };

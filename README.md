@@ -8,7 +8,6 @@ Currently the focus is on getting the UI ready, it is not yet connected to the C
 
 ```sh
 $ npm install
-$ bower install
 ```
 
 ## Build & development
