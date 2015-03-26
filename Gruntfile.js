@@ -158,7 +158,8 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp'
+            '.tmp',
+            'dist'
           ]
         }]
       },
@@ -197,7 +198,16 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    }
+    },
+
+    copy: {
+      dist: {
+        files: [
+          {expand: true, cwd: '.tmp', src: ['main.css', 'main.js'], dest: '<%= yeoman.dist %>/'},
+          {expand: true, cwd: '<%= yeoman.app %>', src: ['images/*'], dest: '<%= yeoman.dist %>/'}
+        ],
+      },
+    },
   });
 
 
@@ -228,7 +238,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'clean:dist',
+    'clean:server',
     'ngAnnotate',
     'concat_css',
     'html2js',
@@ -241,4 +251,8 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('dist', [
+    'clean:dist', 'build', 'copy:dist'
+  ])
 };
