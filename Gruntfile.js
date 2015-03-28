@@ -184,9 +184,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/concat/scripts',
+          cwd: '.tmp',
           src: '*.js',
-          dest: '.tmp/concat/scripts'
+          dest: '.tmp'
         }]
       }
     },
@@ -203,11 +203,29 @@ module.exports = function (grunt) {
     copy: {
       dist: {
         files: [
-          {expand: true, cwd: '.tmp', src: ['crmsitemapeditor.css', 'crmsitemapeditor.js'], dest: '<%= yeoman.dist %>/'},
+          {expand: true, cwd: '.tmp', src: ['crmsitemapeditor.css','crmsitemapeditor.js'], dest: '<%= yeoman.dist %>/'},
           {expand: true, cwd: '<%= yeoman.app %>', src: ['images/*'], dest: '<%= yeoman.dist %>/'}
         ],
       },
     },
+
+    uglify: {
+      dist: {
+        files: {
+          '.tmp/crmsitemapeditor.js': ['.tmp/crmsitemapeditor.js']
+        }
+      }
+    },
+
+    cssmin: {
+      options: {
+      },
+      target: {
+        files: {
+          '.tmp/crmsitemapeditor.css': ['.tmp/crmsitemapeditor.css']
+        }
+      }
+    }
   });
 
 
@@ -221,7 +239,10 @@ module.exports = function (grunt) {
       'concat_css',
       'html2js',
       'browserify',
+      'ngAnnotate',
       'concat',
+      // 'uglify',
+      // 'cssmin',
       'connect:livereload',
       'watch'
     ]);
@@ -239,11 +260,13 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:server',
-    'ngAnnotate',
     'concat_css',
     'html2js',
     'browserify',
-    'concat'
+    'ngAnnotate',
+    'concat',
+    'uglify',
+    'cssmin'
   ]);
 
   grunt.registerTask('default', [
