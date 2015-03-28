@@ -15,7 +15,7 @@ a:hover {
   box-sizing: border-box;
 }
 .entities__frame {
-  padding: 20px 40px;
+  padding: 20px 15px;
 }
 .entity {
   position: relative;

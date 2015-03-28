@@ -44,7 +44,7 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/app.css'],
+        files: ['<%= yeoman.app %>/styles/*.css'],
         tasks: ['concat_css']
       },
       views: {
@@ -171,7 +171,7 @@ module.exports = function (grunt) {
           // Task-specific options go here.
       },
       all: {
-          src: ['<%= yeoman.app %>/styles/app.css', 'node_modules/bootstrap/dist/css/bootstrap.css'],
+          src: ['<%= yeoman.app %>/styles/bootstrap.css', '<%= yeoman.app %>/styles/app.css'],
           dest: '.tmp/crmsitemapeditor.css'
       },
     },
