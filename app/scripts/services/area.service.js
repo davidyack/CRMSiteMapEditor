@@ -77,10 +77,14 @@ angular.module('navEditorApp')
       });
     };
 
+    var AreaAPIUrl = '/api/areas/';
+
+    if (window.CRMSiteMapEditorSiteMapServiceURL != null)
+      AreaAPIUrl = window.CRMSiteMapEditorSiteMapServiceURL;
 
     var _def = $http({
       method: 'GET',
-      url: '/api/areas/',
+      url: AreaAPIUrl,
       transformResponse: _transformResponse
     });
 
