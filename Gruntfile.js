@@ -87,6 +87,7 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
+              connect.static('node_modules'),
               require('./api'),
               connect.static(appConfig.app),
             ];
@@ -171,7 +172,7 @@ module.exports = function (grunt) {
           // Task-specific options go here.
       },
       all: {
-          src: ['<%= yeoman.app %>/styles/bootstrap.css', '<%= yeoman.app %>/styles/app.css'],
+          src: ['<%= yeoman.app %>/styles/app.css'],
           dest: '.tmp/crmsitemapeditor.css'
       },
     },

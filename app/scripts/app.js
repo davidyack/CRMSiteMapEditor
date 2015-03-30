@@ -9,11 +9,6 @@
  * Main module of the application.
  */
 
-var $ = require('jquery');
-window.jQuery = $;
-
-
-require('bootstrap');
 require('angular');
 var _ = require('underscore');
 require('angular-bootstrap');
