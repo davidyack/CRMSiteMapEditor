@@ -229,7 +229,7 @@ angular.module('navEditorApp')
       save: function() {
         $http({
           method: 'POST',
-          url: '/api/areas/',
+          url: AreaAPIUrl,
           transformRequest: _transformRequest
         });
       }
