@@ -1,0 +1,177 @@
+.entities-panel {
+  /*min-height: 600px;*/
+  background-color: #f8f8f8;
+}
+.voffset {
+  margin-top: 15px;
+}
+.roffset {
+  margin-right: 15px;
+}
+a:hover {
+  cursor: pointer;
+}
+.entities {
+  box-sizing: border-box;
+}
+.entities__frame {
+  padding: 20px 15px;
+}
+.entity {
+  position: relative;
+}
+
+.area-entity {
+  height: 80px;
+  background-color: #5865bf;
+  border: 1px solid #3c4ab2;
+}
+
+.area-entity--selected {
+  background-color: #25328C;
+}
+
+.subarea-entity {
+  padding-left: 15px;
+  text-align: left;
+  height: 50px;
+  line-height: 50px;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.group-entity {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  background-color: #ccc;
+  border: 1px solid #e7e7e7;
+}
+
+.entity:hover .entity-menu-icon {
+  display: block;
+}
+
+.entity-link {
+  color: #333;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-decoration: none;
+  /* No underlines on the link */
+  /*z-index: 10;  Places the link above everything else in the div */
+}
+
+.area-entity .entity-link {
+  padding-left: 15px;
+  padding-top: 45px;
+  font-size: larger;
+}
+
+.area-entity .entity-link__frame {
+  color: white;
+}
+
+.entity-link__frame {
+  display: block;
+  padding-left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.entity-menu-icon {
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+  border-bottom: 10px solid #337ab7;
+  border-right: 10px solid #337ab7;
+  border-top: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+
+.area-entity .entity-menu-icon {
+  border-bottom: 10px solid white;
+  border-right: 10px solid white;
+}
+
+.entity-image-container {
+  position: relative;
+  float: left;
+}
+
+.entity-image-container:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.entity-image-container img {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.entity-menu-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.entity-menu-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.entity-menu-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+[ng-drop].drag-enter {
+  /*border: 1px solid gray;*/
+}
+
+
+
+.szn-autocomplete-results {
+  max-height: 200px;
+  width: 90%;
+  background-color: #fff;
+  overflow: scroll;
+  position: absolute;
+  z-index: 9999;
+  padding: 5px 0;
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 4px;
+  list-style-type: none;
+}
+
+.szn-autocomplete-results li {
+  padding: 0 5px;
+  line-height: 1.4;
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.szn-autocomplete-results li.selected {
+  background: Highlight;
+  color: HighlightText;
+}
+
