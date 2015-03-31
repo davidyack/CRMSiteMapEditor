@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
-  var externals = ['angular', 'bootstrap', 'jquery', 'underscore','angular-bootstrap',
+  var externals = ['angular', 'underscore','angular-bootstrap',
     'angular-szn-autocomplete', 'angular-ui-router', 'ngDraggable'];
 
   // Define the configuration for all the tasks
@@ -42,10 +42,6 @@ module.exports = function (grunt) {
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
-      },
-      styles: {
-        files: ['<%= yeoman.app %>/styles/*.css'],
-        tasks: ['concat_css']
       },
       views: {
         files: ['<%= yeoman.app %>/views/*.html'],
@@ -167,18 +163,6 @@ module.exports = function (grunt) {
       server: '.tmp'
     },
 
-    concat_css: {
-      options: {
-          // Task-specific options go here.
-      },
-      all: {
-          src: ['<%= yeoman.app %>/styles/app.css'],
-          dest: '.tmp/crmsitemapeditor.css'
-      },
-    },
-
-
-
     // ng-annotate tries to make the code safe for minification automatically
     // by using the Angular long form for dependency injection.
     ngAnnotate: {
@@ -204,7 +188,7 @@ module.exports = function (grunt) {
     copy: {
       dist: {
         files: [
-          {expand: true, cwd: '.tmp', src: ['crmsitemapeditor.css','crmsitemapeditor.js'], dest: '<%= yeoman.dist %>/'},
+          {expand: true, cwd: '.tmp', src: ['crmsitemapeditor.js'], dest: '<%= yeoman.dist %>/'},
           {expand: true, cwd: '<%= yeoman.app %>', src: ['images/*'], dest: '<%= yeoman.dist %>/'}
         ],
       },
@@ -223,7 +207,7 @@ module.exports = function (grunt) {
       },
       target: {
         files: {
-          '.tmp/crmsitemapeditor.css': ['.tmp/crmsitemapeditor.css']
+          '<%= yeoman.app %>/styles/app.css': ['<%= yeoman.dist %>/crmsitemapeditor.css']
         }
       }
     }
@@ -237,7 +221,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'concat_css',
       'html2js',
       'browserify',
       'ngAnnotate',
@@ -261,7 +244,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:server',
-    'concat_css',
     'html2js',
     'browserify',
     'ngAnnotate',

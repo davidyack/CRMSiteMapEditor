@@ -24,7 +24,7 @@ var urlsServiceUrl = '/api/urls';
           method: 'GET',
           url: CRMSiteMapEditorSiteMapUrlServiceURL
         }).then(function(response) {
-          return (urls = response.data.Urls);
+          return (urls = response.data);
         });
       },
       getUrls: function() {

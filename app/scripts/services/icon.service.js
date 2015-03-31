@@ -23,7 +23,7 @@ var iconServiceUrl = '/api/icons';
           method: 'GET',
           url: iconServiceUrl
         }).then(function(response) {
-          return (icons = response.data.Icons);
+          return (icons = response.data);
         });
       },
       getIcons: function() {

@@ -23,7 +23,7 @@ angular.module('navEditorApp')
           method: 'GET',
           url: entityServiceUrl
         }).then(function(response) {
-          return (entities = response.data.Enities);
+          return (entities = response.data);
         });
       },
       getEntities: function() {

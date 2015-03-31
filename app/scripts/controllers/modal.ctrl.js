@@ -64,7 +64,25 @@ angular.module('navEditorApp')
   })
   .controller('ModalUpdateCtrl3', function($scope, $modalInstance, _, $controller, oldEntity, urls, icons, entities) {
     angular.extend(this, $controller('ModalUpdateCtrl2', {$scope: $scope, $modalInstance: $modalInstance, oldEntity: oldEntity, urls: urls, icons:icons}));
-    $scope.entities = entities;
+    $scope.entitySearch = function(query, deferred) {
+        var results = _.map(_.filter(entities, function(item) {
+          return (item.LogicalName.indexOf(query) !== -1);
+        }), function(item) {
+          return {
+            value: item.DisplayName,
+            name: item.LogicalName
+          };
+        });
+        deferred.resolve({results: results});
+    };
+    $scope.entityOptions = {
+        searchMethod: 'entitySearch',
+        templateUrl: 'views/autocomplete.view.html',
+        onSelect: function(item) {
+          $scope.newEntity.Entity = item.name;
+        }
+    };
+
   })
   .controller('ModalUpdateCtrl', function($scope, $modalInstance, _, oldEntity) {
     $scope.oldEntity = oldEntity;

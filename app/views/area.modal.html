@@ -36,6 +36,10 @@
       <label for="entityUrl">Url</label>
       <input class="form-control" ng-model="newEntity.Url" szn-autocomplete="urlOptions" placeholder="Search url"/>
     </div>
+    <label class="checkbox-inline">
+      <input type="checkbox" ng-model="newEntity.ShowGroups">Show Groups</input>
+    </label>
+
   </div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary" ng-click="submitted=true; ok(form.$valid)">Save</button>

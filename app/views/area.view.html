@@ -5,9 +5,9 @@
     ng-drop="true">
     <div class='entity area-entity' ng-drag="true" ng-drag-data="area"
       ng-class="{'area-entity--selected': areaCtrl.$stateParams.areaid === area.Id}">
-      <a draggable="false" class="entity-link" ui-sref="area.group({areaid: area.Id})">
-        <span class="entity-link__frame">{{area.Title}}</span>
-      </a>
+        <a draggable="false" class="entity-link" ui-sref="area.group({areaid: area.Id})">
+          <span class="entity-link__frame">{{area.Title}}</span>
+        </a>
       <div class="entity-menu-icon"></div>
       <div class="entity-menu-container">
         <div class="entity-menu-frame">
