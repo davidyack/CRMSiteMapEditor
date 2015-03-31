@@ -227,6 +227,20 @@ angular.module('navEditorApp')
           url: $window.CRMSiteMapEditorSiteMapServiceURL || '/api/areas/',
           transformRequest: _transformRequest
         });
+      },
+      download: function() {
+        return $http({
+          method: 'POST',
+          url: $window.CRMSiteMapEditorDownloadServiceURL || '/api/sitemapdownload',
+          transformRequest: _transformRequest
+        }).success(function(data, status, headers, config) {
+          var element = angular.element('<a/>');
+          element.attr({
+            href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+            target: '_blank',
+            download: 'download.xml'
+          })[0].click();
+        });
       }
     };
   });

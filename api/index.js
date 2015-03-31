@@ -14,5 +14,6 @@ require('./areas')(app);
 require('./entities')(app);
 require('./icons')(app);
 require('./urls')(app);
+require('./download')(app);
 
 module.exports = app;
