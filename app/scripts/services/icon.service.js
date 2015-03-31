@@ -10,18 +10,13 @@ require('angular');
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('IconService', function ($http) {
-
-var iconServiceUrl = '/api/icons';
- if (window.CRMSiteMapEditorSiteMapIconServiceURL != null)
-  iconServiceUrl = CRMSiteMapEditorSiteMapIconServiceURL;
-
+  .factory('IconService', function ($http, $window) {
     var icons;
     return {
       loadIcons: function () {
         $http({
           method: 'GET',
-          url: iconServiceUrl
+          url: $window.CRMSiteMapEditorSiteMapIconServiceURL || '/api/icons'
         }).then(function(response) {
           return (icons = response.data);
         });
