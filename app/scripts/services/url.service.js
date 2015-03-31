@@ -19,7 +19,7 @@ angular.module('navEditorApp')
           method: 'GET',
           url: 'api/urls'
         }).then(function(response) {
-          return (urls = response.data.Urls);
+          return (urls = response.data);
         });
       },
       getUrls: function() {

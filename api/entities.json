@@ -1,9 +1,9 @@
-{
-  "Enities": [
-    {
-      "DisplayName": "Account"
-    },{
-      "DisplayName": "Activity"
-    }
-  ]
-}
+[
+  {
+    "DisplayName": "Display Account",
+    "LogicalName": "Logical Account"
+  },{
+    "DisplayName": "Display Activity",
+    "LogicalName": "Logical Activity"
+  }
+]

@@ -30,11 +30,8 @@
     </div>
     <div class="form-group">
       <label for="entityEntity">Entity</label>
-      <select name="entityEntity" class="form-control"
-        ng-model="newEntity.Entity"
-        ng-options="entity.DisplayName for entity in entities" >
-      </select>
-     </div>
+      <input class="form-control" ng-model="newEntity.Entity" szn-autocomplete="entityOptions" placeholder="Search entity"/>
+    </div>
     <label class="checkbox-inline">
       <input type="checkbox" ng-model="newEntity.AvailableOffline">Available Offline</input>
     </label>

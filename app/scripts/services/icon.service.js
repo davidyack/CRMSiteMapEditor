@@ -19,7 +19,7 @@ angular.module('navEditorApp')
           method: 'GET',
           url: '/api/icons'
         }).then(function(response) {
-          return (icons = response.data.Icons);
+          return (icons = response.data);
         });
       },
       getIcons: function() {

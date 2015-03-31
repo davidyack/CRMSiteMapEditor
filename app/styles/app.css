@@ -75,9 +75,11 @@ a:hover {
 }
 
 .entity-link__frame {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
+  display: block;
+  padding-left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -98,6 +100,23 @@ a:hover {
 .area-entity .entity-menu-icon {
   border-bottom: 10px solid white;
   border-right: 10px solid white;
+}
+
+.entity-image-container {
+  position: relative;
+  float: left;
+}
+
+.entity-image-container:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.entity-image-container img {
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .entity-menu-container {

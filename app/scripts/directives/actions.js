@@ -18,7 +18,7 @@ angular.module('navEditorApp')
       controllerAs: 'actionsCtrl'
     };
   })
-  .controller('ActionsCtrl', function(AreaService, ModalService) {
+  .controller('ActionsCtrl', function(AreaService, ModalService, $state) {
     this.save = function() {
       AreaService.save();
     };
@@ -26,6 +26,7 @@ angular.module('navEditorApp')
     this.addArea = function() {
       ModalService.area().then(function(newArea) {
         AreaService.addArea(newArea);
+        $state.go('area.group', {areaid: newArea.Id});
       });
     };
   });
