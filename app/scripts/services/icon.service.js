@@ -12,12 +12,16 @@ require('angular');
 angular.module('navEditorApp')
   .factory('IconService', function ($http) {
 
+var iconServiceUrl = '/api/icons';
+ if (window.CRMSiteMapEditorSiteMapIconServiceURL != null)
+  iconServiceUrl = CRMSiteMapEditorSiteMapIconServiceURL;
+
     var icons;
     return {
       loadIcons: function () {
         $http({
           method: 'GET',
-          url: '/api/icons'
+          url: iconServiceUrl
         }).then(function(response) {
           return (icons = response.data);
         });

@@ -12,12 +12,17 @@ require('angular');
 angular.module('navEditorApp')
   .factory('UrlService', function ($http) {
 
+var urlsServiceUrl = '/api/urls';
+ if (window.CRMSiteMapEditorSiteMapUrlServiceURL != null)
+  urlsServiceUrl = CRMSiteMapEditorSiteMapUrlServiceURL;
+
+
     var urls;
     return {
       loadUrls: function () {
         $http({
           method: 'GET',
-          url: 'api/urls'
+          url: CRMSiteMapEditorSiteMapUrlServiceURL
         }).then(function(response) {
           return (urls = response.data);
         });
