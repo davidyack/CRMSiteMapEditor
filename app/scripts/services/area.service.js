@@ -9,7 +9,7 @@ require('angular');
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('AreaService', function($http, _) {
+  .factory('AreaService', function($http, _, $window) {
 
     var _mixinArea = function(area) {
       return angular.extend(area, {
@@ -77,14 +77,9 @@ angular.module('navEditorApp')
       });
     };
 
-    var AreaAPIUrl = '/api/areas/';
-
-    if (window.CRMSiteMapEditorSiteMapServiceURL != null)
-      AreaAPIUrl = window.CRMSiteMapEditorSiteMapServiceURL;
-
     var _def = $http({
       method: 'GET',
-      url: AreaAPIUrl,
+      url: $window.CRMSiteMapEditorSiteMapServiceURL || '/api/areas/',
       transformResponse: _transformResponse
     });
 
@@ -229,8 +224,22 @@ angular.module('navEditorApp')
       save: function() {
         $http({
           method: 'POST',
-          url: AreaAPIUrl,
+          url: $window.CRMSiteMapEditorSiteMapServiceURL || '/api/areas/',
           transformRequest: _transformRequest
+        });
+      },
+      download: function() {
+        return $http({
+          method: 'POST',
+          url: $window.CRMSiteMapEditorDownloadServiceURL || '/api/sitemapdownload',
+          transformRequest: _transformRequest
+        }).success(function(data, status, headers, config) {
+          var element = angular.element('<a/>');
+          element.attr({
+            href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+            target: '_blank',
+            download: 'download.xml'
+          })[0].click();
         });
       }
     };

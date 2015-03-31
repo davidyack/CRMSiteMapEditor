@@ -23,6 +23,10 @@ angular.module('navEditorApp')
       AreaService.save();
     };
 
+    this.download = function() {
+      AreaService.download();
+    };
+
     this.addArea = function() {
       ModalService.area().then(function(newArea) {
         AreaService.addArea(newArea);

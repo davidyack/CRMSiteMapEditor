@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<request type="product" id="12344556">
+  <query>
+    <vendor>redhat</vendor>
+    <name>linux</name>
+  </query>
+</request>

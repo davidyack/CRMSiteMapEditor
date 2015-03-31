@@ -10,19 +10,13 @@ require('angular');
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('UrlService', function ($http) {
-
-var urlsServiceUrl = '/api/urls';
- if (window.CRMSiteMapEditorSiteMapUrlServiceURL != null)
-  urlsServiceUrl = CRMSiteMapEditorSiteMapUrlServiceURL;
-
-
+  .factory('UrlService', function ($http, $window) {
     var urls;
     return {
       loadUrls: function () {
         $http({
           method: 'GET',
-          url: CRMSiteMapEditorSiteMapUrlServiceURL
+          url: $window.CRMSiteMapEditorSiteMapUrlServiceURL || '/api/urls'
         }).then(function(response) {
           return (urls = response.data);
         });

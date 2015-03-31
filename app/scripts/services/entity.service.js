@@ -10,18 +10,15 @@ require('angular');
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('EntityService', function ($http) {
+  .factory('EntityService', function ($http, $window) {
 
  var entityServiceUrl = '/api/entities';
- if (window.CRMSiteMapEditorSiteMapEntityServiceURL != null)
-  entityServiceUrl = CRMSiteMapEditorSiteMapEntityServiceURL;
-
     var entities;
     return {
       loadEntities: function () {
         $http({
           method: 'GET',
-          url: entityServiceUrl
+          url: $window.CRMSiteMapEditorSiteMapEntityServiceURL || '/api/entities'
         }).then(function(response) {
           return (entities = response.data);
         });
