@@ -207,7 +207,7 @@ module.exports = function (grunt) {
       },
       target: {
         files: {
-          '<%= yeoman.app %>/styles/app.css': ['<%= yeoman.dist %>/crmsitemapeditor.css']
+          '<%= yeoman.dist %>/crmsitemapeditor.css': ['<%= yeoman.app %>/styles/app.css']
         }
       }
     }
