@@ -262,3 +262,4 @@ module.exports = function (grunt) {
     'clean:dist', 'build', 'copy:dist'
   ])
 };
+
