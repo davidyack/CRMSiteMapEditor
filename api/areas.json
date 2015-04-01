@@ -10,7 +10,9 @@
                     "SubAreas": [
                         {
                             "Title": "Dashboards",
-                            "Id": "SubArea1_1_1"
+                            "Id": "SubArea1_1_1",
+                            "IconPreviewUrl": "images/subarea_ico_16.gif"
+
                         },
                         {
                             "Title": "What's New",
