@@ -4,8 +4,8 @@
       ng-drop="true">
     <div class='entity subarea-entity' ng-drag="true"
       ng-drag-data="subarea">
-      <div class="entity-image-container">
-        <img src="images/subarea_ico_16.gif" />
+      <div ng-show="{{subarea.IconPreviewUrl !== undefined}}" class="entity-image-container">
+        <img src="{{subarea.IconPreviewUrl}}" />
       </div>
       <div class="entity-link__frame">{{subarea.Title}}</div>
       <div class="entity-menu-icon"></div>
