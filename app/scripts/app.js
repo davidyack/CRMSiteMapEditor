@@ -14,8 +14,9 @@ var _ = require('underscore');
 require('angular-bootstrap');
 require('angular-szn-autocomplete');
 require('angular-ui-router');
-
+require('angular-loading-bar');
 require('ngDraggable');
+require('angular-animate');
 
 angular.module('underscore', [])
   .factory('_', function() {
@@ -27,10 +28,12 @@ angular.module('underscore', [])
 
 
 angular
-  .module('navEditorApp', ['templates-main','underscore', 'ui.router', 'ui.bootstrap', 'ngDraggable', 'angular-szn-autocomplete'])
-  .config(function($urlRouterProvider, $locationProvider) {
+  .module('navEditorApp', ['templates-main','underscore', 'ui.router', 'ui.bootstrap', 'ngDraggable',
+          'angular-szn-autocomplete', 'angular-loading-bar', 'ngAnimate'])
+  .config(function($urlRouterProvider, $locationProvider, cfpLoadingBarProvider) {
     $urlRouterProvider.otherwise('/');
     // $locationProvider.html5Mode(true);
+    cfpLoadingBarProvider.latencyThreshold = 500;
   });
 
 

@@ -22,7 +22,7 @@ module.exports = function (grunt) {
   };
 
   var externals = ['angular', 'underscore','angular-bootstrap',
-    'angular-szn-autocomplete', 'angular-ui-router', 'ngDraggable'];
+    'angular-szn-autocomplete', 'angular-ui-router', 'ngDraggable', 'angular-loading-bar', 'angular-animate'];
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -38,6 +38,10 @@ module.exports = function (grunt) {
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
+      },
+      styles: {
+        files: ['<%= yeoman.app %>/styles/*.css'],
+        tasks: ['concat_css']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -58,7 +62,6 @@ module.exports = function (grunt) {
         ]
       }
     },
-
     html2js: {
       options: {
         base: 'app'
@@ -201,13 +204,21 @@ module.exports = function (grunt) {
         }
       }
     },
-
+    concat_css: {
+      options: {
+          // Task-specific options go here.
+      },
+      all: {
+          src: ['node_modules/angular-loading-bar/build/loading-bar.css', '<%= yeoman.app %>/styles/app.css'],
+          dest: '.tmp/crmsitemapeditor.css'
+      },
+    },
     cssmin: {
       options: {
       },
       target: {
         files: {
-          '<%= yeoman.dist %>/crmsitemapeditor.css': ['<%= yeoman.app %>/styles/app.css']
+          '<%= yeoman.dist %>/crmsitemapeditor.css': ['.tmp/crmsitemapeditor.css']
         }
       }
     }
@@ -221,6 +232,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'concat_css',
       'html2js',
       'browserify',
       'ngAnnotate',
@@ -244,6 +256,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:server',
+    'concat_css',
     'html2js',
     'browserify',
     'ngAnnotate',
