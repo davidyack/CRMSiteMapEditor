@@ -237,12 +237,19 @@ angular.module('navEditorApp')
           url: $window.CRMSiteMapEditorDownloadServiceURL || '/api/sitemapdownload',
           transformRequest: _transformRequest
         }).success(function(data, status, headers, config) {
+          var userAgent = 'navigator' in $window && 'userAgent' in $window.navigator &&
+            $window.navigator.userAgent.toLowerCase() || '';
+          if (/msie/i.test(userAgent) || 'ActiveXObject' in window) {
+            var blob1 = new Blob([data]);
+            $window.navigator.msSaveBlob(blob1, 'download.xml');
+          } else {
           var element = angular.element('<a/>');
-          element.attr({
-            href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
-            target: '_blank',
-            download: 'download.xml'
-          })[0].click();
+            element.attr({
+              href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+              target: '_blank',
+              download: 'download.xml'
+            })[0].click();
+          }
         });
       }
     };
