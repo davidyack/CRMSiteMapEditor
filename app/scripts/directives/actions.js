@@ -33,10 +33,10 @@ angular.module('navEditorApp')
       }.bind(this));
     };
 
-    this.addarea = function() {
-      ModalService.area().then(function(newarea) {
-        AreaService.addarea(newarea);
-        $state.go('area.group', {areaid: newarea.id});
+    this.addArea = function() {
+      ModalService.area().then(function(newArea) {
+        AreaService.addArea(newArea);
+        $state.go('area.group', {areaid: newArea.Id});
       });
     };
   });

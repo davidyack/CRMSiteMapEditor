@@ -201,6 +201,9 @@ angular.module('navEditorApp')
       getSubAreas: function(areaId, groupId) {
         return _getSubAreas(areaId, groupId);
       },
+      getSubArea: function(id) {
+        return _indexes.PKSubAreas[id];
+      },
       addSubArea: function(group, _subArea) {
         var subArea = _mixinSubArea(_subArea, group);
         var subAreas = _getSubAreas(group.__AreaId__, group.__GroupId__);
