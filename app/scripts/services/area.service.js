@@ -139,7 +139,8 @@ angular.module('navEditorApp')
         _areas.push(area);
         _indexes.PKAreas[area.Id] = area;
       },
-      updateArea: function(area, newArea) {
+      updateArea: function(area, _newArea) {
+        var newArea = _.mixinArea(_newArea);
         _areas[_.indexOf(_areas, area)] = newArea;
         delete _indexes.PKAreas[area.Id];
         _indexes.PKAreas[newArea.Id] = newArea;
@@ -173,7 +174,8 @@ angular.module('navEditorApp')
         _getGroups(area.Id).push(group);
         _indexes.PKGroups[group.Id] = group;
       },
-      updateGroup: function(group, newGroup) {
+      updateGroup: function(group, _newGroup) {
+        var newGroup = _.mixinGroup(_newGroup, group);
         var groups = _getGroups(group.__AreaId__);
         groups[_.indexOf(groups, group)] = newGroup;
         delete _indexes.PKGroups[group.Id];
@@ -205,7 +207,8 @@ angular.module('navEditorApp')
         subAreas.push(subArea);
         _indexes.PKSubAreas[subArea.Id] = subArea;
       },
-      updateSubArea: function(subArea, newSubArea) {
+      updateSubArea: function(subArea, _newSubArea) {
+        var newSubArea = _mixinSubArea(_newSubArea, subArea);
         var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
         subAreas[_.indexOf(subAreas, subArea)] = newSubArea;
         delete _indexes.PKSubAreas[subArea.Id];
