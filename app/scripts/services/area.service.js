@@ -140,7 +140,7 @@ angular.module('navEditorApp')
         _indexes.PKAreas[area.Id] = area;
       },
       updateArea: function(area, _newArea) {
-        var newArea = _.mixinArea(_newArea);
+        var newArea = _mixinArea(_newArea);
         _areas[_.indexOf(_areas, area)] = newArea;
         delete _indexes.PKAreas[area.Id];
         _indexes.PKAreas[newArea.Id] = newArea;
@@ -175,7 +175,7 @@ angular.module('navEditorApp')
         _indexes.PKGroups[group.Id] = group;
       },
       updateGroup: function(group, _newGroup) {
-        var newGroup = _.mixinGroup(_newGroup, group);
+        var newGroup = _mixinGroup(_newGroup, group);
         var groups = _getGroups(group.__AreaId__);
         groups[_.indexOf(groups, group)] = newGroup;
         delete _indexes.PKGroups[group.Id];

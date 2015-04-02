@@ -37,7 +37,7 @@
       <input class="form-control" ng-model="newEntity.Url" szn-autocomplete="urlOptions" placeholder="Search url"/>
     </div>
     <label class="checkbox-inline">
-      <input type="checkbox" ng-model="newEntity.ShowGroups">Show Groups</input>
+      <input ng-init="newEntity.ShowGroups = oldEntity === undefined || newEntity.ShowGroups" type="checkbox" ng-model="newEntity.ShowGroups">Show Groups</input>
     </label>
 
   </div>
