@@ -20,11 +20,17 @@ angular.module('navEditorApp')
   })
   .controller('ActionsCtrl', function(AreaService, ModalService, $state) {
     this.save = function() {
-      AreaService.save();
+      this.saving = true;
+      AreaService.save().then(function() {
+        this.saving = false;
+      }.bind(this));
     };
 
     this.download = function() {
-      AreaService.download();
+      this.downloading = true;
+      AreaService.download().then(function() {
+        this.downloading = false;
+      }.bind(this));
     };
 
     this.addArea = function() {

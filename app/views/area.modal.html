@@ -7,12 +7,13 @@
   </div>
   <div class="modal-body">
     <div class="form-group"
-    ng-class="{'has-error': submitted && (form.entityId.$error.required || form.entityId.$error.uniqid)}">
+    ng-class="{'has-error': submitted && (form.entityId.$error.pattern || form.entityId.$error.required || form.entityId.$error.uniqid)}">
       <label for="entityId">ID</label>
-      <input uniqid="Area" required ng-model='newEntity.Id' name="entityId" type="text" class="form-control" id="entityId" placeholder="Enter id">
+      <input uniqid="Area" ng-pattern="/^[A-Z0-9_]+$/i" required ng-model='newEntity.Id' name="entityId" type="text" class="form-control" id="entityId" placeholder="Enter id">
 
       <div ng-if="submitted"
           ng-messages="form.entityId.$error" class="errors">
+          <span ng-if="form.entityId.$error.pattern" class="help-block" ng-message="pattern">Please enter letters, numbers or _ only</span>
           <span ng-if="form.entityId.$error.required" class="help-block" ng-message="required">The ID is required</span>
           <span ng-if="form.entityId.$error.uniqid" class="help-block"
             ng-message="uniqid">The ID already exists</span>
@@ -37,7 +38,7 @@
       <input class="form-control" ng-model="newEntity.Url" szn-autocomplete="urlOptions" placeholder="Search url"/>
     </div>
     <label class="checkbox-inline">
-      <input type="checkbox" ng-model="newEntity.ShowGroups">Show Groups</input>
+      <input ng-init="newEntity.ShowGroups = oldEntity === undefined || newEntity.ShowGroups" type="checkbox" ng-model="newEntity.ShowGroups">Show Groups</input>
     </label>
 
   </div>

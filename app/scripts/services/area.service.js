@@ -9,7 +9,7 @@ require('angular');
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('AreaService', function($http, _, $window) {
+  .factory('AreaService', function($http, _, $window, $q) {
 
     var _mixinArea = function(area) {
       return angular.extend(area, {
@@ -139,7 +139,8 @@ angular.module('navEditorApp')
         _areas.push(area);
         _indexes.PKAreas[area.Id] = area;
       },
-      updateArea: function(area, newArea) {
+      updateArea: function(area, _newArea) {
+        var newArea = _mixinArea(_newArea);
         _areas[_.indexOf(_areas, area)] = newArea;
         delete _indexes.PKAreas[area.Id];
         _indexes.PKAreas[newArea.Id] = newArea;
@@ -173,7 +174,8 @@ angular.module('navEditorApp')
         _getGroups(area.Id).push(group);
         _indexes.PKGroups[group.Id] = group;
       },
-      updateGroup: function(group, newGroup) {
+      updateGroup: function(group, _newGroup) {
+        var newGroup = _mixinGroup(_newGroup, group);
         var groups = _getGroups(group.__AreaId__);
         groups[_.indexOf(groups, group)] = newGroup;
         delete _indexes.PKGroups[group.Id];
@@ -199,13 +201,17 @@ angular.module('navEditorApp')
       getSubAreas: function(areaId, groupId) {
         return _getSubAreas(areaId, groupId);
       },
+      getSubArea: function(id) {
+        return _indexes.PKSubAreas[id];
+      },
       addSubArea: function(group, _subArea) {
         var subArea = _mixinSubArea(_subArea, group);
         var subAreas = _getSubAreas(group.__AreaId__, group.__GroupId__);
         subAreas.push(subArea);
         _indexes.PKSubAreas[subArea.Id] = subArea;
       },
-      updateSubArea: function(subArea, newSubArea) {
+      updateSubArea: function(subArea, _newSubArea) {
+        var newSubArea = _mixinSubArea(_newSubArea, subArea);
         var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
         subAreas[_.indexOf(subAreas, subArea)] = newSubArea;
         delete _indexes.PKSubAreas[subArea.Id];
@@ -225,14 +231,15 @@ angular.module('navEditorApp')
       },
 
       save: function() {
-        $http({
+        return $http({
           method: 'POST',
           url: $window.CRMSiteMapEditorSiteMapServiceURL || '/api/areas/',
           transformRequest: _transformRequest
         });
       },
       download: function() {
-        return $http({
+        var deferred = $q.defer();
+        $http({
           method: 'POST',
           url: $window.CRMSiteMapEditorDownloadServiceURL || '/api/sitemapdownload',
           transformRequest: _transformRequest
@@ -250,7 +257,11 @@ angular.module('navEditorApp')
               download: 'download.xml'
             })[0].click();
           }
+          deferred.resolve();
+        }).error(function(data, status, headers, config) {
+          deferred.reject();
         });
+        return deferred.promise;
       }
     };
   });
