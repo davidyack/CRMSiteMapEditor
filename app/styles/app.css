@@ -175,3 +175,11 @@ a:hover {
   color: HighlightText;
 }
 
+#loading-bar-spinner .spinner-icon {
+  border-top-color: white;
+  border-left-color: white;
+}
+
+#loading-bar .bar {
+  background: white;
+}
