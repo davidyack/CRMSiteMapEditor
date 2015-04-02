@@ -9,7 +9,7 @@ require('angular');
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('AreaService', function($http, _, $window) {
+  .factory('AreaService', function($http, _, $window, $q) {
 
     var _mixinArea = function(area) {
       return angular.extend(area, {
@@ -228,14 +228,15 @@ angular.module('navEditorApp')
       },
 
       save: function() {
-        $http({
+        return $http({
           method: 'POST',
           url: $window.CRMSiteMapEditorSiteMapServiceURL || '/api/areas/',
           transformRequest: _transformRequest
         });
       },
       download: function() {
-        return $http({
+        var deferred = $q.defer();
+        $http({
           method: 'POST',
           url: $window.CRMSiteMapEditorDownloadServiceURL || '/api/sitemapdownload',
           transformRequest: _transformRequest
@@ -253,7 +254,11 @@ angular.module('navEditorApp')
               download: 'download.xml'
             })[0].click();
           }
+          deferred.resolve();
+        }).error(function(data, status, headers, config) {
+          deferred.reject();
         });
+        return deferred.promise;
       }
     };
   });
