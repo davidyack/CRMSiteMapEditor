@@ -53,10 +53,14 @@ angular.module('navEditorApp')
   .controller('AreaCtrl', function(AreaService, ModalService, $stateParams, $state, _) {
     this.areas = AreaService.getAreas();
     this.$stateParams = $stateParams;
+    this.allowDrop = true;
 
     this.onDropComplete = function(index, obj, evt) {
-      if (_.indexOf(this.areas, obj) !== -1) {
-        AreaService.reorderArea(index, obj);
+      if (this.AllowDrop)
+      {
+        if (_.indexOf(this.areas, obj) !== -1) {
+          AreaService.reorderArea(index, obj);
+        }
       }
     };
 
@@ -71,13 +75,17 @@ angular.module('navEditorApp')
     };
 
     this.update = function(oldArea) {
+      this.allowDrop=false;
       ModalService.area(oldArea).then(function(newArea) {
+        this.allowDrop=true;
         AreaService.updateArea(oldArea, newArea);
       });
     };
 
     this.addGroup = function(area) {
+      this.allowDrop=false;
       ModalService.group().then(function(newGroup) {
+        this.allowDrop=true;
         AreaService.addGroup(area, newGroup);
       });
     };
