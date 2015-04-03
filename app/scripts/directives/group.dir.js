@@ -20,11 +20,7 @@ angular.module('navEditorApp')
       url: '^/group/:areaid'
     });
   })
-  .controller('GroupCtrl', function(AreaService, ModalService, $stateParams, $state, _, $templateCache, $scope, SettingsStore) {
-    $scope.reorderingMode = SettingsStore.reorderingMode;
-    $scope.$listenTo(SettingsStore, 'reorderingModeChanged', function() {
-      $scope.reorderingMode = SettingsStore.reorderingMode;
-    });
+  .controller('GroupCtrl', function(AreaService, ModalService, $stateParams, $state, _, $templateCache) {
     this.groups = AreaService.getGroups($stateParams.areaid);
     this.$stateParams = $stateParams;
 

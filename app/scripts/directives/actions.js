@@ -18,11 +18,7 @@ angular.module('navEditorApp')
       controllerAs: 'actionsCtrl'
     };
   })
-  .controller('ActionsCtrl', function(AreaService, ModalService, $state, SettingsStore, flux, $scope) {
-    $scope.reorderingMode = SettingsStore.reorderingMode;
-    $scope.$listenTo(SettingsStore, 'reorderingModeChanged', function() {
-      $scope.reorderingMode = SettingsStore.reorderingMode;
-    });
+  .controller('ActionsCtrl', function(AreaService, ModalService, $state) {
     this.save = function() {
       this.saving = true;
       AreaService.save().then(function() {
@@ -42,8 +38,5 @@ angular.module('navEditorApp')
         AreaService.addArea(newArea);
         $state.go('area.group', {areaid: newArea.Id});
       });
-    };
-    this.changeReorderingMode = function() {
-      flux.dispatch('changeReorderingMode');
     };
   });

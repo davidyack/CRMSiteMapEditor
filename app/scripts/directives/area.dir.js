@@ -50,12 +50,7 @@ angular.module('navEditorApp')
       controllerAs: 'areaCtrl'
     };
   })
-  .controller('AreaCtrl', function(AreaService, ModalService, $stateParams, $state, _, $scope, SettingsStore) {
-    $scope.reorderingMode = SettingsStore.reorderingMode;
-    $scope.$listenTo(SettingsStore, 'reorderingModeChanged', function() {
-      $scope.reorderingMode = SettingsStore.reorderingMode;
-    });
-
+  .controller('AreaCtrl', function(AreaService, ModalService, $stateParams, $state, _) {
     this.areas = AreaService.getAreas();
     this.$stateParams = $stateParams;
 

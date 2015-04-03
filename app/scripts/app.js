@@ -17,7 +17,6 @@ require('angular-ui-router');
 require('angular-loading-bar');
 require('ngDraggable');
 require('angular-animate');
-require('flux-angular');
 
 angular.module('underscore', [])
   .factory('_', function() {
@@ -30,7 +29,7 @@ angular.module('underscore', [])
 
 angular
   .module('navEditorApp', ['templates-main','underscore', 'ui.router', 'ui.bootstrap', 'ngDraggable',
-          'angular-szn-autocomplete', 'angular-loading-bar', 'ngAnimate', 'flux'])
+          'angular-szn-autocomplete', 'angular-loading-bar', 'ngAnimate'])
   .config(function($urlRouterProvider, $locationProvider, cfpLoadingBarProvider) {
     $urlRouterProvider.otherwise('/');
     // $locationProvider.html5Mode(true);
