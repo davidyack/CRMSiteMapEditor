@@ -10,11 +10,7 @@ require('angular-ui-router');
  * # group
  */
 angular.module('navEditorApp')
-  .controller('SubAreaCtrl', function(AreaService, ModalService, $stateParams, $scope, _, SettingsStore) {
-    $scope.reorderingMode = SettingsStore.reorderingMode;
-    $scope.$listenTo(SettingsStore, 'reorderingModeChanged', function() {
-      $scope.reorderingMode = SettingsStore.reorderingMode;
-    });
+  .controller('SubAreaCtrl', function(AreaService, ModalService, $stateParams, $scope, _) {
     this.subareas = AreaService.getSubAreas($stateParams.areaid, $scope.group.Id);
     this.$stateParams = $stateParams;
 
