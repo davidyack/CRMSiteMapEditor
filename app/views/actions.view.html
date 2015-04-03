@@ -1,7 +1,11 @@
 <div class="well">
   <div class="btn-group" role="group">
-    <button class="btn btn-default navbar-btn" ng-click="actionsCtrl.addArea()">Add area</button>
-    <button ng-disabled="actionsCtrl.downloading" class="btn btn-default navbar-btn" ng-click="actionsCtrl.download()">Download</button>
-    <button ng-disabled="actionsCtrl.saving" class="btn btn-primary navbar-btn" ng-click="actionsCtrl.save()">Save</button>
+    <button class="btn btn-default" ng-click="actionsCtrl.addArea()">Add area</button>
+    <button ng-disabled="actionsCtrl.downloading" class="btn btn-default" ng-click="actionsCtrl.download()">Download</button>
+    <button ng-disabled="actionsCtrl.saving" class="btn btn-primary" ng-click="actionsCtrl.save()">Save</button>
   </div>
+  <button class="btn btn-default pull-right" data-toggle="button" ng-click="actionsCtrl.changeReorderingMode()">
+    <span ng-if="reorderingMode">DnD on</span>
+    <span ng-if="!reorderingMode">DnD off</span>
+  </button>
 </div>

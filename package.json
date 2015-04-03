@@ -9,7 +9,9 @@
     "angular-szn-autocomplete": "^1.0.2",
     "angular-ui-router": "^0.2.13",
     "bootstrap": "3.3.4",
+    "flux-angular": "git://github.com/kalinichenko/flux-angular",
     "jquery": "^2.1.3",
+    "napa": "^1.2.0",
     "underscore": "^1.8.2"
   },
   "repository": {},
