@@ -47,16 +47,14 @@
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "^3.1.0",
+    "napa": "^1.2.0",
     "time-grunt": "^1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "install": "napa"
-  },
-  "napa": {
-    "ngDraggable": "fatlinesofcode/ngDraggable"
+    "install": "napa kalinichenko/ngDraggable"
   },
   "browser": {
     "ngDraggable": "./node_modules/ngDraggable/ngDraggable.js"
