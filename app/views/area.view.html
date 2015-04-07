@@ -3,7 +3,7 @@
     class="entities__frame col-lg-3 col-md-4 col-sm-4 col-xs-6"
     ng-drop-success="areaCtrl.onDropComplete($index, $data, $event)"
     ng-drop="true">
-    <div class='entity area-entity' ng-drag="reorderingMode" ng-drag-data="area"
+    <div class='entity area-entity' ng-drag="true" ng-drag-data="area"
       ng-class="{'area-entity--selected': areaCtrl.$stateParams.areaid === area.Id}">
         <a  class="entity-link" ui-sref="area.group({areaid: area.Id})">
           <span class="entity-link__frame">{{area.Title}}</span>
