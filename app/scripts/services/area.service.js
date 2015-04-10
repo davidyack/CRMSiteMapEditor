@@ -19,7 +19,7 @@ angular.module('navEditorApp')
 
     var _mixinGroup = function(group, area) {
       return angular.extend(group, {
-        __AreaId__: area.Id,
+        __AreaId__: area.__AreaId__ || area.Id,
         __GroupId__: group.Id,
       });
     };
@@ -27,7 +27,7 @@ angular.module('navEditorApp')
     var _mixinSubArea = function(subArea, group) {
       return angular.extend(subArea, {
         __AreaId__: group.__AreaId__,
-        __GroupId__: group.Id,
+        __GroupId__: group.__GroupID__ || group.Id,
         __SubAreaId__: subArea.Id
       });
     };
@@ -161,6 +161,17 @@ angular.module('navEditorApp')
           _areas.splice(index, 0, area);
         }
       },
+      newArea: function() {
+        var id;
+        do {
+          id = _.uniqueId('sitemap_');
+        } while(_.has(_indexes.PKAreas, id));
+
+        return {
+          Id: id,
+          ShowGroups: true
+        };
+      },
 
       // GROUPS
       getGroups: function(areaId) {
@@ -196,6 +207,17 @@ angular.module('navEditorApp')
           groups.splice(index, 0, group);
         }
       },
+      newGroup: function() {
+        var id;
+        do {
+          id = _.uniqueId('sitemap_');
+        } while(_.has(_indexes.PKGroups, id));
+
+        return {
+          Id: id
+        };
+      },
+
 
       // SUB AREAS
       getSubAreas: function(areaId, groupId) {
@@ -228,6 +250,16 @@ angular.module('navEditorApp')
           subAreas.splice(_.indexOf(subAreas, subArea), 1);
           subAreas.splice(index, 0, subArea);
         }
+      },
+      newSubArea: function() {
+        var id;
+        do {
+          id = _.uniqueId('sitemap_');
+        } while(_.has(_indexes.PKSubArea, id));
+
+        return {
+          Id: id
+        };
       },
 
       save: function() {

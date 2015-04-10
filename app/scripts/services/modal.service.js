@@ -16,7 +16,7 @@ require('./entity.service');
  * Factory in the navEditorApp.
  */
 angular.module('navEditorApp')
-  .factory('ModalService', function($modal, EntityService, IconService, UrlService, _) {
+  .factory('ModalService', function($modal, EntityService, IconService, UrlService, _, AreaService) {
 
     var openRemoveModal = function(entityType, entity) {
       return $modal.open({
@@ -33,44 +33,53 @@ angular.module('navEditorApp')
       });
     };
 
-    var areaModal = function(oldEntity) {
+    var areaModal = function(entity) {
       return $modal.open({
         templateUrl: 'views/area.modal.html',
         controller: 'ModalUpdateCtrl2',
         resolve: {
-          oldEntity: function() {
-            return oldEntity;
+          entity: function() {
+            return entity ? angular.extend({}, entity) : AreaService.newArea();
           },
           urls: UrlService.getUrls,
+          isNew: function() {
+            return entity === undefined;
+          },
           icons: IconService.getIcons,
         }
       });
     };
 
-    var subAreaModal = function(oldEntity) {
+    var subAreaModal = function(entity) {
       return $modal.open({
         templateUrl: 'views/subarea.modal.html',
         controller: 'ModalUpdateCtrl3',
         resolve: {
-          oldEntity: function() {
-            return oldEntity;
+          entity: function() {
+            return entity ? angular.extend({}, entity) : AreaService.newSubArea();
           },
           urls: UrlService.getUrls,
+          isNew: function() {
+            return entity === undefined;
+          },
           icons: IconService.getIcons,
           entities: EntityService.getEntities
         }
       });
     };
 
-    var groupModal = function(oldEntity) {
+    var groupModal = function(entity) {
       return $modal.open({
         templateUrl: 'views/group.modal.html',
         controller: 'ModalUpdateCtrl1',
         resolve: {
-          oldEntity: function() {
-            return oldEntity;
+          entity: function() {
+            return entity ? angular.extend({}, entity) : AreaService.newGroup();
           },
-          urls: UrlService.getUrls
+          urls: UrlService.getUrls,
+          isNew: function() {
+            return entity === undefined;
+          }
         }
       });
     };

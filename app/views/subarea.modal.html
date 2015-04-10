@@ -1,8 +1,8 @@
 <form name="form" novalidate>
   <div class="modal-header">
     <h3 class="modal-title">
-    <span ng-if="oldEntity !== undefined" >Edit sub area</span>
-    <span ng-if="oldEntity === undefined" >Add sub area</span>
+    <span ng-if="!isNew" >Edit sub area</span>
+    <span ng-if="isNew" >Add sub area</span>
     </h3>
   </div>
   <div class="modal-body">

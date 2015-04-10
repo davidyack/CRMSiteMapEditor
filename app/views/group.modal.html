@@ -1,8 +1,8 @@
 <form name="form" novalidate>
   <div class="modal-header">
     <h3 class="modal-title">
-    <span ng-if="oldEntity !== undefined" >Edit group</span>
-    <span ng-if="oldEntity === undefined" >Add group</span>
+    <span ng-if="!isNew" >Edit group</span>
+    <span ng-if="isNew" >Add group</span>
     </h3>
   </div>
   <div class="modal-body">
