@@ -59,12 +59,12 @@ angular.module('navEditorApp')
       return JSON.stringify({
         Areas: _.map(_areas, function(_area) {
           var area = _.extend({}, _area);
-          if (area.Groups.length === 0) {
+          if (area.Groups === null || area.Groups.length === 0) {
             delete area.Groups;
           } else {
             area.Groups = _.map(area.Groups, function(_group) {
               var group = _.extend({}, _group);
-              if (group.SubAreas.length === 0) {
+              if (group.SubAreas === null || group.SubAreas.length === 0) {
                 delete group.SubAreas;
               } else {
                 group.SubAreas = _.map(group.SubAreas, function(_subArea) {
