@@ -31,11 +31,11 @@
     </div>
     <div class="form-group">
       <label for="entityIcon">Icon</label>
-      <input class="form-control" ng-model="newEntity.Icon" szn-autocomplete="iconOptions" placeholder="Search icon"/>
+      <input class="form-control" ng-model="newEntity.Icon" szn-autocomplete="iconOptions" placeholder="Start typing icon name"/>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.entityUrl.$error.url}">
       <label for="entityUrl">Url</label>
-      <input class="form-control" ng-model="newEntity.Url" szn-autocomplete="urlOptions" placeholder="Search url"/>
+      <input class="form-control" ng-model="newEntity.Url" szn-autocomplete="urlOptions" placeholder="Start typing url"/>
     </div>
     <label class="checkbox-inline">
       <input type="checkbox" ng-model="newEntity.ShowGroups">Show Groups</input>
