@@ -9,7 +9,12 @@ module.exports = function(app) {
   });
 
   app.post('/api/areas', function(req, res) {
-    res.json(req.body);
+    res.json({
+      Success:false,
+      ErrorMessage: 'save failed',
+      ErrorReference: '1234567',
+      ProgressTag: 'Save Step 7'
+    });
   });
 
 };
