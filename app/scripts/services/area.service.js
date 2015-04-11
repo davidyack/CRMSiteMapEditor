@@ -27,7 +27,7 @@ angular.module('navEditorApp')
     var _mixinSubArea = function(subArea, group) {
       return angular.extend(subArea, {
         __AreaId__: group.__AreaId__,
-        __GroupId__: group.__GroupID__ || group.Id,
+        __GroupId__: group.__GroupId__ || group.Id,
         __SubAreaId__: subArea.Id
       });
     };
@@ -244,11 +244,18 @@ angular.module('navEditorApp')
         subAreas.splice(_.indexOf(subAreas, subArea.data), 1);
         delete _indexes.PKSubAreas[subArea.Id];
       },
-      reorderSubArea: function(index, subArea) {
-        if (_isItASubArea(subArea)) {
-          var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
-          subAreas.splice(_.indexOf(subAreas, subArea), 1);
-          subAreas.splice(index, 0, subArea);
+      reorderSubArea: function(srcSubArea, dstSubArea) {
+        if (_isItASubArea(srcSubArea) && _isItASubArea(dstSubArea)) {
+          var srcSubAreas =_getSubAreas(srcSubArea.__AreaId__, srcSubArea.__GroupId__);
+          srcSubAreas.splice(_.indexOf(srcSubAreas, srcSubArea), 1);
+
+          var dstSubAreas =_getSubAreas(dstSubArea.__AreaId__, dstSubArea.__GroupId__);
+          var index = _.findIndex(dstSubAreas, function(subArea) {
+            return subArea.id === dstSubArea.id;
+          });
+
+          var _srcSubArea = _mixinSubArea(srcSubArea, dstSubArea);
+          dstSubAreas.splice(index, 0, _srcSubArea);
         }
       },
       newSubArea: function() {
