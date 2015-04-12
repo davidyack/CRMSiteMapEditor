@@ -18,11 +18,18 @@ angular.module('navEditorApp')
       controllerAs: 'actionsCtrl'
     };
   })
-  .controller('ActionsCtrl', function(AreaService, ModalService, $state) {
+  .controller('ActionsCtrl', function(AreaService, ModalService, $state, AlertsActions) {
     this.save = function() {
       this.saving = true;
-      AreaService.save().then(function() {
+      AreaService.save().then(function(resp) {
         this.saving = false;
+        if (!resp.data.Success) {
+          AlertsActions.add({
+            msg: resp.data.ErrorMessage + '. Ref: ' + resp.data.ErrorReference +
+              '. ProgressTag: ' + resp.data.ProgressTag,
+            type: 'danger'
+          });
+        }
       }.bind(this));
     };
 

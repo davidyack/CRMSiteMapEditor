@@ -1,6 +1,6 @@
 <div>
   <div ng-repeat="subarea in subAreaCtrl.subareas" class=" voffset"
-      ng-drop-success="subAreaCtrl.onDropComplete($index, $data, $event)"
+      ng-drop-success="subAreaCtrl.onDropComplete($data, subarea)"
       ng-drop="true">
     <div class='entity subarea-entity' ng-drag="true"
       ng-drag-data="subarea">

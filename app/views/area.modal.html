@@ -1,8 +1,8 @@
 <form name="form" novalidate>
   <div class="modal-header">
     <h3 class="modal-title">
-    <span ng-if="oldEntity !== undefined" >Edit area</span>
-    <span ng-if="oldEntity === undefined" >Add area</span>
+    <span ng-if="!isNew" >Edit area</span>
+    <span ng-if="isNew" >Add area</span>
     </h3>
   </div>
   <div class="modal-body">
@@ -31,14 +31,14 @@
     </div>
     <div class="form-group">
       <label for="entityIcon">Icon</label>
-      <input class="form-control" ng-model="newEntity.Icon" szn-autocomplete="iconOptions" placeholder="Search icon"/>
+      <input class="form-control" ng-model="newEntity.Icon" szn-autocomplete="iconOptions" placeholder="Start typing icon name"/>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.entityUrl.$error.url}">
       <label for="entityUrl">Url</label>
-      <input class="form-control" ng-model="newEntity.Url" szn-autocomplete="urlOptions" placeholder="Search url"/>
+      <input class="form-control" ng-model="newEntity.Url" szn-autocomplete="urlOptions" placeholder="Start typing url"/>
     </div>
     <label class="checkbox-inline">
-      <input ng-init="newEntity.ShowGroups = oldEntity === undefined || newEntity.ShowGroups" type="checkbox" ng-model="newEntity.ShowGroups">Show Groups</input>
+      <input type="checkbox" ng-model="newEntity.ShowGroups">Show Groups</input>
     </label>
 
   </div>
