@@ -17,6 +17,12 @@ a:hover {
 .entities__frame {
   padding: 20px 15px;
 }
+
+.entities__tablet-area {
+  width: 480px;
+  margin: 0 auto;
+}
+
 .entity {
   position: relative;
 }
