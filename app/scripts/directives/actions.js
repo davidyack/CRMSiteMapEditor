@@ -18,7 +18,11 @@ angular.module('navEditorApp')
       controllerAs: 'actionsCtrl'
     };
   })
-  .controller('ActionsCtrl', function(AreaService, ModalService, $state, AlertsActions) {
+  .controller('ActionsCtrl', function(AreaService, ModalService, $state, AlertsActions, $scope) {
+    this.changeState = function() {
+      $state.go('tablet');
+    };
+
     this.save = function() {
       this.saving = true;
       AreaService.save().then(function(resp) {

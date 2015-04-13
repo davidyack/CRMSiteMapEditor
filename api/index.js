@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+require('./tabletareas')(app);
 require('./areas')(app);
 require('./entities')(app);
 require('./icons')(app);
