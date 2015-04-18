@@ -246,13 +246,13 @@ angular.module('navEditorApp')
       },
       reorderSubArea: function(srcSubArea, dstSubArea) {
         if (_isItASubArea(srcSubArea) && _isItASubArea(dstSubArea)) {
-          var srcSubAreas =_getSubAreas(srcSubArea.__AreaId__, srcSubArea.__GroupId__);
-          srcSubAreas.splice(_.indexOf(srcSubAreas, srcSubArea), 1);
-
           var dstSubAreas =_getSubAreas(dstSubArea.__AreaId__, dstSubArea.__GroupId__);
           var index = _.findIndex(dstSubAreas, function(subArea) {
-            return subArea.id === dstSubArea.id;
+            return subArea.Id === dstSubArea.Id;
           });
+
+          var srcSubAreas =_getSubAreas(srcSubArea.__AreaId__, srcSubArea.__GroupId__);
+          srcSubAreas.splice(_.indexOf(srcSubAreas, srcSubArea), 1);
 
           var _srcSubArea = _mixinSubArea(srcSubArea, dstSubArea);
           dstSubAreas.splice(index, 0, _srcSubArea);
