@@ -2,7 +2,7 @@
   <div class="row entities">
     <div ng-repeat="group in groupCtrl.groups"
         class='entities__frame col-lg-3 col-md-4 col-sm-4 col-xs-6'>
-      <div ng-drop-success="groupCtrl.onDropComplete($index, $data, $event)"
+      <div ng-drop-success="groupCtrl.onDropComplete($data, group)"
         ng-drop="true">
         <div class='entity group-entity' ng-drag="true" ng-drag-data="group">
           <span class="entity-link__frame">{{group.Title}}</span>

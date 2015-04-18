@@ -24,10 +24,8 @@ angular.module('navEditorApp')
     this.groups = AreaService.getGroups($stateParams.areaid);
     this.$stateParams = $stateParams;
 
-    this.onDropComplete = function(index, obj, evt) {
-      if (_.indexOf(this.groups, obj) !== -1) {
-        AreaService.reorderGroup(index, obj);
-      }
+    this.onDropComplete = function(src, dst) {
+      AreaService.reorderGroup(src, dst);
     };
 
     this.remove = function(group) {

@@ -54,9 +54,10 @@ angular.module('navEditorApp')
     this.areas = AreaService.getAreas();
     this.$stateParams = $stateParams;
 
-    this.onDropComplete = function(index, obj, evt) {
-      if (_.indexOf(this.areas, obj) !== -1) {
-        AreaService.reorderArea(index, obj);
+    this.onDropComplete = function(src, dst) {
+      AreaService.reorderArea(src, dst);
+      if (AreaService.isItAGroup(src)) {
+        $state.go('area.group', {areaid: dst.Id});
       }
     };
 
