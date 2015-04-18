@@ -7,15 +7,15 @@
         <div class='entity group-entity' ng-drag="true" ng-drag-data="group">
           <span class="entity-link__frame">{{group.Title}}</span>
           <div class="entity-menu-icon"></div>
-          <div ng-drag-cancel class="entity-menu-container">
+          <div class="entity-menu-container">
             <div class="entity-menu-frame">
               <a class="entity-menu-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></a>
               <ul class="dropdown-menu pull-right" role="menu">
-                <li><a ng-click="groupCtrl.addSubArea(group)">Add item</a>
+                <li><a ng-cancel-drag ng-click="groupCtrl.addSubArea(group)">Add item</a>
                 </li>
-                <li><a ng-click="groupCtrl.update(group)">Edit</a>
+                <li><a ng-cancel-drag ng-click="groupCtrl.update(group)">Edit</a>
                 </li>
-                <li><a ng-click="groupCtrl.remove(group)">Remove</a>
+                <li><a ng-cancel-drag ng-click="groupCtrl.remove(group)">Remove</a>
                 </li>
               </ul>
             </div>

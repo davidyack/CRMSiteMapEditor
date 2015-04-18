@@ -9,13 +9,13 @@
       </div>
       <div class="entity-link__frame">{{subarea.Title}}</div>
       <div class="entity-menu-icon"></div>
-      <div ng-drag-cancel class="entity-menu-container">
+      <div class="entity-menu-container">
         <div class="entity-menu-frame">
           <a class="entity-menu-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" draggable="false"></a>
           <ul class="dropdown-menu pull-right" role="menu">
-            <li><a ng-click="subAreaCtrl.update(subarea)">Edit</a>
+            <li><a ng-cancel-drag ng-click="subAreaCtrl.update(subarea)">Edit</a>
             </li>
-            <li><a ng-click="subAreaCtrl.remove(subarea)">Remove</a>
+            <li><a ng-cancel-drag ng-click="subAreaCtrl.remove(subarea)">Remove</a>
             </li>
           </ul>
         </div>
