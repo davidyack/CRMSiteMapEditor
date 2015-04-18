@@ -83,4 +83,17 @@ angular.module('navEditorApp')
         }
     };
 
+  })
+  .controller('ModalRemoveCtrl', function($scope, $modalInstance, entityType, entity) {
+    $scope.entityType = entityType;
+    $scope.entity = entity;
+
+    $scope.ok = function() {
+      $modalInstance.close();
+    };
+
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
   });
+

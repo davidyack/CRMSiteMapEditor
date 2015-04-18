@@ -1,7 +1,7 @@
 <div>
   <div ng-repeat="area in areaCtrl.areas"
     class="entities__frame col-lg-3 col-md-4 col-sm-4 col-xs-6"
-    ng-drop-success="areaCtrl.onDropComplete($index, $data, $event)"
+    ng-drop-success="areaCtrl.onDropComplete($data, area)"
     ng-drop="true">
     <div class='entity area-entity' ng-drag="true" ng-drag-data="area"
       ng-class="{'area-entity--selected': areaCtrl.$stateParams.areaid === area.Id}">
@@ -9,15 +9,15 @@
           <span class="entity-link__frame">{{area.Title}}</span>
         </a>
       <div class="entity-menu-icon"></div>
-      <div ng-drag-cancel class="entity-menu-container">
+      <div class="entity-menu-container">
         <div class="entity-menu-frame">
-          <a ui-sref="area.group({areaid: area.Id})"              
+          <a ui-sref="area.group({areaid: area.Id})"
               class="entity-menu-link dropdown-toggle"
               data-toggle="dropdown" aria-expanded="false"></a>
           <ul class="dropdown-menu pull-right" role="menu">
-            <li><a  ng-click="areaCtrl.addGroup(area)">Add group</a></li>
-            <li><a  ng-click="areaCtrl.update(area)">Edit</a></li>
-            <li><a  ng-click="areaCtrl.remove(area)">Remove</a></li>
+            <li><a ng-cancel-drag ng-click="areaCtrl.addGroup(area)">Add group</a></li>
+            <li><a ng-cancel-drag ng-click="areaCtrl.update(area)">Edit</a></li>
+            <li><a ng-cancel-drag ng-click="areaCtrl.remove(area)">Remove</a></li>
           </ul>
         </div>
       </div>
