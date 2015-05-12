@@ -210,11 +210,16 @@ angular.module('navEditorApp')
         });
       },
       reorderGroup: function(src, dst) {
-        if (_isItAGroup(dst)) {
+        if (_isItAGroup(src)) {
           var groups = _getGroups(dst.__AreaId__);
           var dstIdx = _.indexOf(groups, dst);
           groups.splice(_.indexOf(groups, src), 1);
           groups.splice(dstIdx, 0, src);
+        } else if (_isItASubArea(src)) {
+          var srcSubAreas = _getSubAreas(src.__AreaId__, src.__GroupId__);
+          srcSubAreas.splice(_.indexOf(srcSubAreas, src), 1);
+          var _srcSubArea = _mixinSubArea(src, dst);
+          dst.SubAreas.splice(dst.SubAreas.length, 0, _srcSubArea);
         }
       },
       newGroup: function() {
