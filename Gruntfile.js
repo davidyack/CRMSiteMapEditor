@@ -116,6 +116,7 @@ module.exports = function (grunt) {
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
+        ignores: ['**/videogular.js', '**/vg-controls.js'],
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
@@ -273,6 +274,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist', [
     'clean:dist', 'build', 'copy:dist'
-  ])
+  ]);
 };
 
