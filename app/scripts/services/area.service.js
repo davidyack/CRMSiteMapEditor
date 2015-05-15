@@ -255,9 +255,11 @@ angular.module('navEditorApp')
         _indexes.PKSubAreas[newSubArea.Id] = newSubArea;
       },
       removeSubArea: function(subArea) {
-        var subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
-        subAreas.splice(_.indexOf(subAreas, subArea.data), 1);
-        delete _indexes.PKSubAreas[subArea.Id];
+        var idx, subAreas =_getSubAreas(subArea.__AreaId__, subArea.__GroupId__);
+        if ((idx = _.indexOf(subAreas, subArea)) !== -1) {
+          subAreas.splice(idx, 1);
+          delete _indexes.PKSubAreas[subArea.Id];
+        }
       },
       reorderSubArea: function(srcSubArea, dstSubArea) {
         if (_isItASubArea(srcSubArea) && _isItASubArea(dstSubArea)) {
