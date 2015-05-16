@@ -19,6 +19,9 @@ require('ngDraggable');
 require('angular-resource');
 require('angular-animate');
 require('flux-angular');
+require('angular-sanitize');
+require('./videogular.js');
+require('./vg-controls.js');
 
 angular.module('underscore', [])
   .factory('_', function() {
@@ -31,7 +34,8 @@ angular.module('underscore', [])
 
 angular
   .module('navEditorApp', ['templates-main','underscore', 'ui.router', 'ui.bootstrap', 'ngDraggable',
-          'angular-szn-autocomplete', 'angular-loading-bar', 'ngAnimate', 'flux', 'ngResource'])
+          'angular-szn-autocomplete', 'angular-loading-bar', 'ngAnimate', 'flux', 'ngResource', 'ngSanitize', 'com.2fdevs.videogular',
+          'com.2fdevs.videogular.plugins.controls'])
   .config(function($urlRouterProvider, $locationProvider, cfpLoadingBarProvider) {
     $urlRouterProvider.otherwise('/');
     // $locationProvider.html5Mode(true);

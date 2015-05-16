@@ -23,6 +23,10 @@ angular.module('navEditorApp')
       $state.go('tablet');
     };
 
+    this.showHelp = function() {
+      $state.go('help');
+    };
+
     this.save = function() {
       this.saving = true;
       AreaService.save().then(function(resp) {
