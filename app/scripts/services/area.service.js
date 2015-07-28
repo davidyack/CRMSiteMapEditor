@@ -166,7 +166,7 @@ angular.module('navEditorApp')
         } else if (_isItAGroup(src)) {
           var srcGroups = _getGroups(src.__AreaId__);
           srcGroups.splice(_.indexOf(srcGroups, src), 1);
-
+          _.each(src.SubAreas, function (sa) { sa.__AreaId__ = dst.__AreaId__; });
           dst.Groups.splice(dst.Groups.length, 0, src);
         }
       },
